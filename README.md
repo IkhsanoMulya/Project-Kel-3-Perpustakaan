@@ -1,15 +1,20 @@
 # Electron + Svelte + Tailwind
 
-A quick ElectronJS App starter template using:
+Aplikasi Perpustakaan dengan menggunakan :
  * Svelte
  * Tailwind (JIT)
  * Electron Builder
 
+Fitur :
+  * CRUD data buku, peminjaman, pengembalian, dan anggota
+  * Scanner barcode buku dan anggota dengan kamera komputer
+  * Whatsapp Notification
+  
 ## Install
 ```
-git clone https://github.com/twiny/svelte-electron-tailwind
+git clone https://github.com/IkhsanoMulya/Project-Kel-3-Perpustakaan
 
-cd svelte-electron-tailwind/
+cd Project-Kel-3-Perpustakaan
 
 npm install
 ```
