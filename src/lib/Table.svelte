@@ -1,4 +1,6 @@
 <script>
+	import { each } from 'svelte/internal';
+
 	export let headings;
 </script>
 
@@ -11,7 +13,9 @@
 						<table class="table mb-0">
 							<thead class="bg-primary">
 								<tr>
-									<th scope="col">EMPLOYEES</th>
+									{#each headings as heading}
+										<th scope="col">{heading}</th>
+									{/each}
 								</tr>
 							</thead>
 							<tbody>

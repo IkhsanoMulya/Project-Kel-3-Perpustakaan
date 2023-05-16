@@ -116,7 +116,7 @@ function createMainWindow() {
 	else serveURL(mainWindow);
 }
 
-app.once('ready', createLoginWindow);
+app.once('ready', createMainWindow);
 app.on('activate', () => {
 	if (!mainWindow) {
 		createMainWindow();

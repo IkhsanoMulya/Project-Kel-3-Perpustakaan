@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Button from '$lib/Button.svelte';
 	import Table from '$lib/Table.svelte';
-	const headings = ['No', 'Nama Peminjam'];
+	const headings = ['No', 'Nomor Peminjaman', 'Nama Peminjam', 'Detail'];
 </script>
 
 <div class="inline">
