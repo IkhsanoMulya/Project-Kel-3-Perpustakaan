@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel='stylesheet' href='../node_modules/bootstrap/dist/css/bootstrap.min.css'>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 
     <title>Login</title>
 </head>
 <body>
-    <div class="dropdown position-fixed bottom-0 end-0 mb-3 me-3 bd-mode-toggle">
+    <div class="dropdown fixed bottom-0 right-0 mb-3 mr-3">
         <button
-            class="btn btn-bd-primary py-2 dropdown-toggle d-flex align-items-center"
+            class="btn bg-blue-500 text-white py-2 px-4 flex items-center"
             id="bd-theme"
             type="button"
             aria-expanded="false"
@@ -27,7 +27,7 @@
             <li>
                 <button
                     type="button"
-                    class="dropdown-item d-flex align-items-center"
+                    class="dropdown-item flex items-center"
                     data-bs-theme-value="light"
                     aria-pressed="false"
                 >
@@ -35,13 +35,13 @@
                         <use href="#sun-fill" />
                     </svg>
                     Light
-                    <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2" /></svg>
+                    <svg class="bi ms-auto hidden" width="1em" height="1em"><use href="#check2" /></svg>
                 </button>
             </li>
             <li>
                 <button
                     type="button"
-                    class="dropdown-item d-flex align-items-center"
+                    class="dropdown-item flex items-center"
                     data-bs-theme-value="dark"
                     aria-pressed="false"
                 >
@@ -49,13 +49,13 @@
                         <use href="#moon-stars-fill" />
                     </svg>
                     Dark
-                    <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2" /></svg>
+                    <svg class="bi ms-auto hidden" width="1em" height="1em"><use href="#check2" /></svg>
                 </button>
             </li>
             <li>
                 <button
                     type="button"
-                    class="dropdown-item d-flex align-items-center active"
+                    class="dropdown-item flex items-center active"
                     data-bs-theme-value="auto"
                     aria-pressed="true"
                 >
@@ -63,44 +63,77 @@
                         <use href="#circle-half" />
                     </svg>
                     Auto
-                    <svg class="bi ms-auto d-none" width="1em" height="1em"><use href="#check2" /></svg>
+                    <svg class="bi ms-auto hidden" width="1em" height="1em"><use href="#check2" /></svg>
                 </button>
             </li>
         </ul>
     </div>
     
-    <main class="form-signin w-100 m-auto">
-        <form>
-            <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57" />
-            <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+    <main class="max-w-sm mx-auto">
+        <form class="mt-16 p-8 bg-white rounded shadow-lg">
+            <svg
+                height="200px"
+                width="200px"
+                version="1.1"
+                id="Layer_1"
+                xmlns="http://www.w3.org/2000/svg"
+                xmlns:xlink="http://www.w3.org/1999/xlink"
+                viewBox="0 0 506 506"
+                xml:space="preserve"
+                fill="#000000"
+                transform="matrix(1, 0, 0, -1, 0, 0)"
+            >
+                <g id="SVGRepo_bgCarrier" stroke-width="0" />
+                <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" />
+                <g id="SVGRepo_iconCarrier">
+                    <circle style="fill:#90E0EF;" cx="253" cy="253" r="253" />
+                    <path
+                        style="fill:#F2FF49;"
+                        d="M187.6,359.1c-22.8,0-41-18.3-40.9-40.9c-0.1-22.5,18.1-40.9,40.9-40.9c75.2,0,150.3,0,225.5,0v-15.8 H149.6c-31.3,0-56.7,25.4-56.7,56.7s25.4,56.7,56.7,56.7h263.5v-15.8C337.9,359.1,262.8,359.1,187.6,359.1z"
+                    />
+                    <path
+                        style="fill:#E6E9EE;"
+                        d="M149.6,359.1c-22.8,0-41-18.3-40.9-40.9c-0.1-22.5,18.1-40.9,40.9-40.9c87.8,0,175.7,0,263.5,0 c-10.8,26.2-10.8,55.6,0,81.8C325.3,359.1,237.4,359.1,149.6,359.1z"
+                    />
+                    <path
+                        style="fill:#FF6B6B;"
+                        d="M318.4,146.9c22.8,0,41,18.3,40.9,40.9c0.1,22.5-18.1,40.9-40.9,40.9c-75.2,0-150.3,0-225.5,0v15.8 h263.5c31.3,0,56.7-25.4,56.7-56.7s-25.4-56.7-56.7-56.7H92.9v15.8C168.1,146.9,243.2,146.9,318.4,146.9z"
+                    />
+                    <path
+                        style="fill:#E6E9EE;"
+                        d="M356.4,146.9c22.8,0,41,18.3,40.9,40.9c0.1,22.5-18.1,40.9-40.9,40.9c-87.8,0-175.7,0-263.5,0 c10.8-26.2,10.8-55.6,0-81.8C180.7,146.9,268.6,146.9,356.4,146.9z"
+                    />
+                </g>
+            </svg>
+            <h1 class="text-3xl font-bold mb-4">Please sign in</h1>
     
-            <div class="form-floating">
+            <div class="mb-4">
                 <input
                     type="email"
-                    class="form-control"
+                    class="appearance-none border border-gray-300 rounded py-2 px-3 w-full leading-tight focus:outline-none focus:border-blue-500"
                     id="floatingInput"
                     placeholder="name@example.com"
                 />
                 <label for="floatingInput">Email address</label>
             </div>
-            <div class="form-floating">
+            <div class="mb-4">
                 <input
                     type="password"
-                    class="form-control"
+                    class="appearance-none border border-gray-300 rounded py-2 px-3 w-full leading-tight focus:outline-none focus:border-blue-500"
                     id="floatingPassword"
                     placeholder="Password"
                 />
                 <label for="floatingPassword">Password</label>
             </div>
     
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" value="remember-me" />
-                    Remember me
+            <div class="mb-4">
+                <label class="flex items-center">
+                    <input type="checkbox" class="form-checkbox" value="remember-me" />
+                    <span class="ml-2">Remember me</span>
                 </label>
             </div>
-            <button class="w-100 btn btn-lg btn-primary" type="submit">Sign in</button>
-            <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2023</p>
+            <button class="w-full bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">Sign in</button>
+            <p class="mt-5 mb-3 text-gray-500">&copy; 2017–2023</p>
         </form>
     </main>
     <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

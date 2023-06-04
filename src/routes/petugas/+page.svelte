@@ -1,5 +1,4 @@
 <script>
-	const headings = ['No', 'Nomor Buku', 'Nama Buku', 'Tahun Terbit'];
 	import {
 		Button,
 		Table,
@@ -20,11 +19,12 @@
 	$: filteredItems = items.filter(
 		(item) => item.maker.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1,
 	);
+	const headings = ['No', 'Nomor Petugas', 'Nama Petugas', 'Detail'];
 </script>
 
 <div class="inline gap-10">
-	<h1 class="text-4xl text-center font-semibold">Buku</h1>
-	<Button color="green">+ Tambah Buku</Button>
+	<h1 class="text-4xl text-center font-semibold">Petugas</h1>
+	<Button color="green">+ Tambah Petugas</Button>
 	<TableSearch placeholder="Search by maker name" hoverable={true} bind:inputValue={searchTerm}>
 		<TableHead>
 			{#each headings as heading}

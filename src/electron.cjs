@@ -22,6 +22,7 @@ function createWindow() {
 	});
 
 	const mainWindow = new BrowserWindow({
+	
 		backgroundColor: 'whitesmoke',
 		autoHideMenuBar: true,
 		trafficLightPosition: {
