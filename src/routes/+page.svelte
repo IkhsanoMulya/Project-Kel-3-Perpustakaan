@@ -6,25 +6,27 @@
 
 <main>
 	<div class="container">
+		<div class="flex justify-center text-center items-center my-5">
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+				<div class="bg-red-400 p-8 rounded-lg shadow-lg">
+					<h2 class="text-white text-2xl mb-4">Pengunjung Hari Ini</h2>
+					<p class="text-white text-4xl">100</p>
+				</div>
+				<div class="bg-yellow-300 p-8 rounded-lg shadow-lg">
+					<h2 class="text-white text-2xl mb-4">Peminjaman Hari Ini</h2>
+					<p class="text-white text-4xl">50</p>
+				</div>
+				<div class="bg-green-400 p-8 rounded-lg shadow-lg">
+					<h2 class="text-white text-2xl mb-4">Jam</h2>
+					<p class="text-white text-4xl">12:00 PM</p>
+				</div>
+			</div>
+		</div>
 		<div class="container">
-			<Card>
-				<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-					Jumlah Pengunjung Hari Ini
-				</h5>
-				<p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">127</p>
-			</Card>
-			<Card>
-				<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-					Jumlah Peminjaman Hari Ini
-				</h5>
-				<p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">127</p>
-			</Card>
-			<Card>
-				<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-					Quotes Hari Ini
-				</h5>
-				<p class="font-normal text-gray-700 dark:text-gray-400 leading-tight">127</p>
-			</Card>
+			<div class="my-5 p-5 text-black bg-gray-200 font-serif text-center rounded-lg">
+				<p class="text-4xl my-2">"Kosong adalah isi, isi adalah kosong"</p>
+				<p class="text-2xl my-2">~ Saya ~</p>
+			</div>
 			<form>
 				<Label for="search" class="block mb-2">Absensi Pengunjung</Label>
 				<Input id="search" placeholder="Masukkan Nomor Anggota" size="lg">

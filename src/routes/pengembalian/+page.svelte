@@ -9,16 +9,25 @@
 		TableSearch,
 	} from 'flowbite-svelte';
 	let searchTerm = '';
-	let items = [
-		{ id: 1, maker: 'Toyota', type: 'ABC', make: 2017 },
-		{ id: 2, maker: 'Ford', type: 'CDE', make: 2018 },
-		{ id: 3, maker: 'Volvo', type: 'FGH', make: 2019 },
-		{ id: 4, maker: 'Saab', type: 'IJK', make: 2020 },
+	let pengembalian = [
+		{ id_pengembalian: 1, id_peminjaman: 1, tgl_kembali: '2023-06-08', denda: 0 },
+		{ id_pengembalian: 2, id_peminjaman: 2, tgl_kembali: '2023-06-09', denda: 0 },
+		{ id_pengembalian: 3, id_peminjaman: 3, tgl_kembali: '2023-06-10', denda: 0 },
+		{ id_pengembalian: 4, id_peminjaman: 4, tgl_kembali: '2023-06-11', denda: 0 },
+		{ id_pengembalian: 5, id_peminjaman: 5, tgl_kembali: '2023-06-12', denda: 0 },
 	];
-	$: filteredItems = items.filter(
-		(item) => item.maker.toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1,
+	$: filteredItems = pengembalian.filter(
+		(item) =>
+			item.id_pengembalian.toString().toLowerCase().indexOf(searchTerm.toLowerCase()) !== -1,
 	);
-	const headings = ['No', 'Nomor Pengembalian', 'Nama Pengembalian', 'Tanggal Kembali'];
+	const headings = [
+		'No',
+		'Nomor Pengembalian',
+		'Nama Pengembalian',
+		'Tanggal Kembali',
+		'Denda',
+		'Detail',
+	];
 </script>
 
 <div class="inline gap-10">
@@ -29,13 +38,17 @@
 				<TableHeadCell>{heading}</TableHeadCell>
 			{/each}
 		</TableHead>
-		<TableBody class="divide-y">
-			{#each filteredItems as item}
+		<TableBody>
+			{#each filteredItems as item, index}
 				<TableBodyRow>
-					<TableBodyCell>{item.id}</TableBodyCell>
-					<TableBodyCell>{item.maker}</TableBodyCell>
-					<TableBodyCell>{item.type}</TableBodyCell>
-					<TableBodyCell>{item.make}</TableBodyCell>
+					<TableBodyCell>{index + 1}</TableBodyCell>
+					<TableBodyCell>{item.id_pengembalian}</TableBodyCell>
+					<TableBodyCell>{item.id_peminjaman}</TableBodyCell>
+					<TableBodyCell>{item.tgl_kembali}</TableBodyCell>
+					<TableBodyCell>{item.denda}</TableBodyCell>
+					<TableBodyCell>
+						<a class="text-blue-600" href="/peminjaman/detail">View</a>
+					</TableBodyCell>
 				</TableBodyRow>
 			{/each}
 		</TableBody>
