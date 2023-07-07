@@ -19,9 +19,15 @@ switch ($page){
             }
         ?>
         <h2> Data Buku </h2>
+        <?php
+            if ($_SESSION['level'] == 'admin') {
+        ?>
         <div class="col-md-4">
             <a href="index.php?p=buku&page=input" class="btn btn-success mb-3" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .90rem;">Tambah buku</a>
         </div>
+        <?php
+            }
+        ?>
             <table class="table table-bordered">
                 <tr class="table-secondary">
                     <th>No</th>
@@ -31,7 +37,14 @@ switch ($page){
                     <th>Tahun Terbit</th>
                     <th>Rak</th>
                     <th>Stok</th>
+
+                <?php
+                    if ($_SESSION['level'] == 'admin') {
+                ?>
                     <th>Aksi</th>
+                <?php
+                    }
+                ?>
                 </tr>
                 <?php
                     include 'koneksi.php';
@@ -47,11 +60,18 @@ switch ($page){
                         <td> <?php echo $data['tahun_terbit'] ?> </td>
                         <td> <?php echo $data['nama_rak'] ?> </td>
                         <td> <?php echo $data['stok'] ?> </td>
+                        <?php
+                            if ($_SESSION['level'] == 'admin') {
+                        ?>
                         <td> 
                             <a href="index.php?p=buku&page=edit&id_edit=<?=$data['id_buku']?>" class="btn btn-warning"><span data-feather="edit" ></span> </a>
                             <a href="proses_buku.php?aksi=hapus_buku&id_hapus=<?= $data['id_buku']?> " class="btn btn-danger" 
                             onclick="return confirm ('Yakin akan menghapus data ?')"><span data-feather="trash-2" class="align-text-bottom"></span></a>
                         </td>
+
+                        <?php
+                            }
+                        ?>
                     </tr>
                 <?php
                     $no++;
@@ -71,69 +91,81 @@ switch ($page){
                 $sql = mysqli_query($db,"SELECT MAX(id_buku) FROM buku");
                 $id = json_encode($sql);
                 if ($id) {
-                    $format = "B%04d";
+                    $format = "B%012d";
                     $pisah = substr($id, 1, 4);
                     $tambah = intval($id) + 1;
                     $newId = sprintf($format,$tambah);
                 }else {
-                    $newId = 'B0001';
+                    $newId = 'B000000000001';
                 }
             ?>
     <h3>Form Input Buku</h3>
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-8">
             <form action="proses_buku.php?aksi=input_buku" method="post">
-            
-                <div class="">
-                    <label class="form-label" for="id"> ID Buku </label>
-                    <input type="text" id="id" name="id_buku" class="form-control" value="<?= $newId ?>" readonly>
+                <div class="d-flex gap-3">
+
+                    <div class="">
+                        <label class="form-label" for="id"> ID Buku </label>
+                        <input type="text" id="id" name="id_buku" class="form-control" value="<?= $newId ?>" readonly>
+                    </div>
+                    
+                    <div class="">
+                        <label class="form-label" for="tahun"> Tahun Terbit </label>
+                        <input type="text" name="tahun_terbit" id="tahun" class="form-control" maxlength="4" required>
+                    </div>
                 </div>
 
-                <div class="">
-                    <label class="form-label" for="judul"> Judul </label>
-                    <input type="text" name="judul" id="judul" class="form-control" required>
-                </div>
-
-                <div class="">
-                    <label class="form-label" for="pengarang"> Pengarang </label>
-                    <input type="text" name="pengarang" id="pengarang" class="form-control" required>
-                </div>
-
-                <div class="">
-                    <label class="form-label" for="penerbit"> Penerbit </label>
-                    <input type="text" name="penerbit" id="penerbit" class="form-control" required>
-                </div>
-
-                <div class="">
-                    <label class="form-label" for="tahun"> Tahun Terbit </label>
-                    <input type="text" name="tahun_terbit" id="tahun" class="form-control" maxlength="4" required>
-                </div>
-
-                <div class="">
-                    <label class="form-label" for="rak">Rak</label>
-                    <select name="rak" id="rak" class="form-control" required>
+                <div class="d-flex gap-3 mt-2">
+                    
+                    <div class="">
+                        <label class="form-label" for="judul"> Judul </label>
+                        <input type="text" name="judul" id="judul" class="form-control" required>
+                    </div>
+                    
+                    <div class="">
+                        <label class="form-label" for="rak">Rak</label>
+                        <select name="rak" id="rak" class="form-control" required>
                         <option value=""  >Pilih Rak</option>
                         <?php
                             $raks = mysqli_query($db,'SELECT * FROM rak');
                             foreach ($raks as $rak) {
                         ?>
                             <option value="<?= $rak['id_rak'] ?>" ><?=$rak['nama_rak']?></option>
-                        <?php
+                            <?php
                             }
-                        ?>
-                    </select>
+                            ?>
+                        </select>
+                    </div>
+
                 </div>
 
-                <div class="">
+                <div class="d-flex mt-2 gap-3">
+
+                    <div class="">
+                        <label class="form-label" for="pengarang"> Pengarang </label>
+                        <input type="text" name="pengarang" id="pengarang" class="form-control" required>
+                    </div>
+                    
+                    <div class="">
                         <label class="form-label" for="harga">Harga</label>
                         <input type="number" class="form-control" id="harga" name="harga" required>
+                    </div>
                 </div>
+                    
+                <div class="d-flex mt-2 gap-3">
 
-                <div class="">
+                    <div class="">
+                        <label class="form-label" for="penerbit"> Penerbit </label>
+                        <input type="text" name="penerbit" id="penerbit" class="form-control" required>
+                    </div>
+                    
+                    <div class="">
                         <label class="form-label" for="stok">Stok</label>
                         <input type="number" class="form-control" id="stok" name="stok" required>
+                    </div>
                 </div>
-
+                    
                 <div class="mt-2">
                     <input type="submit" name="submit" class="btn btn-primary">
                     <input type="reset" name="reset" class="btn btn-secondary">

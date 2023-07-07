@@ -38,7 +38,7 @@
 
     
     $create_buku = "CREATE TABLE IF NOT EXISTS buku (
-        id_buku CHAR(5) NOT NULL PRIMARY KEY,
+        id_buku CHAR(13) NOT NULL PRIMARY KEY,
         judul VARCHAR(100) NOT NULL,
         pengarang VARCHAR(50) NOT NULL,
         penerbit VARCHAR(50) NOT NULL,
@@ -63,7 +63,7 @@
     
     
     $create_peminjaman = "CREATE TABLE IF NOT EXISTS peminjaman (
-        id_peminjaman CHAR(5) NOT NULL PRIMARY KEY,
+        id_peminjaman CHAR(12) NOT NULL PRIMARY KEY,
         id_anggota CHAR(10) NOT NULL,
         tanggal_peminjaman DATE NOT NULL,
         tanggal_pengembalian DATE NOT NULL,
@@ -74,8 +74,8 @@
     mysqli_query($db, $create_peminjaman);
     
     $create_pengembalian = "CREATE TABLE IF NOT EXISTS pengembalian (
-        id_pengembalian CHAR(5) NOT NULL PRIMARY KEY,
-        id_peminjaman CHAR(5) NOT NULL,
+        id_pengembalian CHAR(12) NOT NULL PRIMARY KEY,
+        id_peminjaman CHAR(12) NOT NULL,
         tanggal_pengembalian DATE NOT NULL,
         denda INT NOT NULL,
         FOREIGN KEY (id_peminjaman) REFERENCES peminjaman(id_peminjaman)
@@ -84,13 +84,22 @@
     
    
     $create_detail = "CREATE TABLE IF NOT EXISTS detail_peminjaman (
-        id_peminjaman CHAR(5) NOT NULL,
-        id_buku CHAR(5) NOT NULL,
+        id_peminjaman CHAR(12) NOT NULL,
+        id_buku CHAR(13) NOT NULL,
         FOREIGN KEY (id_peminjaman) REFERENCES peminjaman(id_peminjaman),
         FOREIGN KEY (id_buku) REFERENCES buku(id_buku),
         PRIMARY KEY (id_peminjaman, id_buku)
     );";
     mysqli_query($db, $create_detail);
+    
+    $create_absensi = "CREATE TABLE IF NOT EXISTS absensi (
+        id_absen INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+        id_anggota CHAR(10) NOT NULL,
+        tanggal DATE NOT NULL,
+        waktu TIME NOT NULL,
+        FOREIGN KEY (id_anggota) REFERENCES anggota(id_anggota)
+    );";
+    mysqli_query($db, $create_absensi);
        
         
         $exists_user = "SELECT * from petugas";

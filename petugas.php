@@ -89,15 +89,30 @@
                     
                         <input type="text" class="form-control" value="<?= $newId ?>" name="id_petugas" hidden>
                    
-                    
-                    <div class="">
-                        <label class="form-label">Nama Petugas</label>
-                        <input type="text" class="form-control"  name="nama_petugas" >
+                    <div class="d-flex gap-3">
+
+                        <div class="">
+                            <label class="form-label">Nama Petugas</label>
+                            <input type="text" class="form-control"  name="nama_petugas" required>
+                        </div>
+                        
+                        <div class="">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" required>
+                        </div>
                     </div>
                     
-                    <div class="">
-                        <label class="form-label">Alamat</label>
-                        <textarea class="form-control"  name="alamat" ></textarea>
+                    <div class="d-flex gap-3">
+                            
+                        <div class="">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control" name="username" required>
+                        </div>
+                            
+                        <div class="">
+                            <label class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" name="confirm_password" required>
+                        </div>
                     </div>
 
                     <div class="">
@@ -106,21 +121,11 @@
                     </div>
 
                     <div class="">
-                        <label class="form-label">Username</label>
-                        <input type="text" class="form-control" name="username" required>
-                    </div>
+                            <label class="form-label">Alamat</label>
+                            <textarea class="form-control"  name="alamat" ></textarea>
+                    </div>          
 
-                    <div class="">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" required>
-                    </div>
-
-                    <div class="">
-                        <label class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" name="confirm_password" required>
-                    </div>
-
-                    <div class="mt-1">
+                    <div class="mt-3">
                         <input type="submit" class="btn btn-primary" name="submit" value="Submit">
                         <input type="reset" class="btn btn-secondary" name="reset" value="Reset">
                     </div>
@@ -148,38 +153,44 @@
            
                     <input type="text" class="form-control" name="id_petugas" value="<?= $data['id_petugas'] ?>" hidden>
              
-                    
-                    <div class="">
-                        <label class="form-label">Nama Petugas</label>
-                        <input type="text" class="form-control" value="<?= $data['nama_petugas'] ?>" name="nama_petugas">
-                    </div>
-                    
-                    <div class="">
-                        <label class="form-label">Alamat</label>
-                        <textarea class="form-control"  name="alamat"><?= $data['alamat'] ?></textarea>
+                    <div class="d-flex gap-3">
+
+                        <div class="">
+                            <label class="form-label">Nama Petugas</label>
+                            <input type="text" class="form-control" value="<?= $data['nama_petugas'] ?>" name="nama_petugas">
+                        </div>
+                        
+                        <div class="">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" name="password" required>
+                        </div>
                     </div>
 
+                    <div class="d-flex gap-3">
+
+                        <div class="">
+                            <label class="form-label">Username </label>
+                            <input type="text" class="form-control" name="username" value="<?= $data['username'] ?>" required>
+                        </div>
+                        
+                        <div class="">
+                            <label class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" name="confirm_password" required>
+                        </div>
+                    </div>
+                    
                     <div class="">
                         <label class="form-label">No. Telepon</label>
                         <input type="text" class="form-control" pattern="[0-9]*" value="<?= $data['no_telepon'] ?>" name="no_telepon">
                     </div>
 
                     <div class="">
-                        <label class="form-label">Username </label>
-                        <input type="text" class="form-control" name="username" value="<?= $data['username'] ?>" required>
+                        <label class="form-label">Alamat</label>
+                        <textarea class="form-control"  name="alamat"><?= $data['alamat'] ?></textarea>
                     </div>
 
-                    <div class="">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" required>
-                    </div>
-                    
-                    <div class="">
-                        <label class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" name="confirm_password" required>
-                    </div>
 
-                    <div class="mt-1">
+                    <div class="mt-3">
                         <input type="submit" class="btn btn-primary" name="submit" value="Submit">
                         <input type="reset" class="btn btn-secondary" name="reset" value="Reset">
                     </div>

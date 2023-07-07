@@ -10,15 +10,19 @@
     <div class="col-md-4">
       <div class="card text-white bg-danger mb-3 shadow rounded">
         <div class="card-body">
-          <h6 class="card-title">Pengunjung Hari ini</h6>
           <?php
             include 'koneksi.php';
             $tanggalNow = date('Ymd');
+            $pengunjung = 'SELECT id_anggota FROM absensi WHERE tanggal = '.$tanggalNow;
+            $query = mysqli_query($db,$pengunjung);
+            $jumlahPengunjung = mysqli_num_rows($query);
+            
             $jumlah = 'SELECT id_peminjaman FROM peminjaman WHERE tanggal_peminjaman = '.$tanggalNow;
             $peminjam = mysqli_query($db,$jumlah);
             $jumlahPinjam = mysqli_num_rows($peminjam);
           ?>
-          <h2 class="card-text text-center min-height-200">12</h2>
+          <h6 class="card-title">Pengunjung Hari ini</h6>
+          <h2 class="card-text text-center min-height-200"><?= $jumlahPengunjung?></h2>
         </div>
       </div>
     </div>
@@ -51,11 +55,60 @@
     <div class="col-md-4">
       <div class="card text-white bg-success mb-3 shadow rounded">
         <div class="card-body">
-          <h6 class="card-title"><?= date(' d M Y')?></h6>
+          <h6 class="card-title"><?= date(' D, d M Y')?></h6>
           <h2 class="card-text text-center min-height-200" id="clock"></h2>
         </div>
       </div>
     </div>
+    <?php
+            $pesan=isset($_GET['msg']) ? $_GET['msg'] : '';
+            if ($pesan =='yes'){
+        ?>
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>Absen Tersimpan!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php
+            }else if($pesan == 'no'){
+        ?>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Absen Gagal!</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        <?php
+          }
+        ?>
+    
+    <div class="col-md-5">
+        <form action="" method="post">
+
+            <div class="mb-3">
+              <label class="form-label" for="absen">Absensi</label>
+              <input type="text" class="form-control" name="absen" pattern="[0-9]*" maxlength="10" required>
+            </div>
+
+            <input type="submit" class="btn btn-primary" name="submit" value="Submit">
+            <input type="reset" class="btn btn-secondary" name="reset" value="Reset">
+        </form>
+
+        <?php
+          if (isset($_POST['submit'])) {
+              $anggota = $_POST['absen'];
+              $absen = mysqli_query($db,"INSERT INTO absensi(id_anggota,tanggal,waktu) VALUES ('$anggota',DATE(NOW()),NOW());");
+
+              if ($absen) {
+                echo "<script>
+                window.location = 'index.php?p=home&msg=yes';
+                </script>";
+              }else{
+                echo "<script>
+                  window.location = 'index.php?p=home&msg=no';
+                  </script>";
+              }
+          }
+        ?>
+    </div>
+    
   </div>
 </div>
 

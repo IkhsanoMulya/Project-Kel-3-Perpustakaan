@@ -70,6 +70,16 @@ if (!isset($_SESSION['user']) && !isset($_SESSION['id_login'])) {
         </a>
       </li>
       <li class="nav-item">
+        <a class="nav-link <?php echo  (isset($_GET['p']) && $_GET['p'] == 'absensi' ? 'active' : ''); ?>" href="index.php?p=absensi">
+          <span data-feather="users"></span>
+          Absensi
+        </a>
+      </li>
+      <?php
+        if ($_SESSION['level'] == 'admin') {
+  
+      ?>
+      <li class="nav-item">
         <a class="nav-link <?php echo  (isset($_GET['p']) && $_GET['p'] == 'prodi' ? 'active' : ''); ?>" href="index.php?p=prodi">
           <span data-feather="hexagon"></span>
           Prodi
@@ -87,6 +97,10 @@ if (!isset($_SESSION['user']) && !isset($_SESSION['id_login'])) {
           Rak
         </a>
       </li>
+
+      <?php
+        }
+      ?>
       
       <li class="fixed-bottom d-flex align-items-center ms-5 mb-3">
         <a class="nav-link px-3 text-bg-dark <?php echo (isset($_GET['p']) && $_GET['p'] == 'logout' ? 'active' : ''); ?>" href="logout.php">
@@ -109,6 +123,7 @@ if (!isset($_SESSION['user']) && !isset($_SESSION['id_login'])) {
           if ($p=='anggota') include'anggota.php';
           if ($p=='peminjaman') include'peminjaman.php';
           if ($p=='pengembalian') include'pengembalian.php';
+          if ($p=='absensi') include'absensi.php';
           
           if ($p=='petugas') include'petugas.php';
           if ($p=='prodi') include'prodi.php';

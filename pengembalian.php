@@ -67,48 +67,51 @@ switch ($page){
     case 'input':           
         ?>
             <div class="container mt-3 ">
-                <div class="col-md-4">
+                <div class="col-md-9">
                 <?php
-                        include 'koneksi.php';
-                        $sql = mysqli_query($db,"SELECT MAX(id_pengembalian) FROM pengembalian");
-                        $id = json_encode($sql);
-                        if ($id) {
-                            $format = "K%04d";
-                            $pisah = substr($id, 1, 4);
-                            $tambah = intval($id) + 1;
-                            $newId = sprintf($format,$tambah);
-                        }else {
-                            $newId = 'K0001';
-                        }
-                    ?>
+                include 'koneksi.php';
+                $ymd = date('Ymd');
+                $sql = mysqli_query($db,"SELECT MAX(id_pengembalian) FROM pengembalian WHERE tanggal_pengembalian = '$ymd'");
+                $id = json_encode($sql);
+                if ($id) {
+                    $format = '%03d';
+                    $pisah = substr($id, 9, 3);
+                    $tambah = intval($id) + 1;
+                    $last = sprintf($format,$tambah);
+                    $newId = 'J'.$ymd.$last;
+                }else {
+                    $newId = 'J'.$ymd.'001';
+                }
+            ?>
                     <h2>Form Input Pengembalian</h2>
                     <div class="row">
                         <form action="proses_pengembalian.php?aksi=input_peng" method="post">
-                           
-                            <div class="mb-3">
-                                <label class="form-label">ID Pengembalian</label>
+                           <div class="d-flex gap-2">
+
+                               <div class="">
+                                   <label class="form-label">ID Pengembalian</label>
                                 <input type="text" class="form-control" value="<?= $newId ?>" name="id_pengembalian" readonly>
                             </div>
                             
-                            <div class="mb-3">
+                            <div class="">
                                 <label class="form-label">ID Peminjaman</label>
                                 <input type="text" class="form-control"  name="id_peminjaman" >
                             </div>
                             
-                            <div class="mb-3">
+                            <div class="">
                                 <label class="form-label">Tanggal Kembali</label>
                                 <input class="form-control" type="date" name="tgl_kembali" value="<?= date('Y-m-d')?>" readonly>
                             </div>
 
-                            <div class="mb-3">
+                            <div class="">
                                 <label class="form-label">Denda</label>
                                 <input class="form-control" type="number" name="denda" value="0" readonly>
                             </div>
              
-                            <div class="mb-3">
-                                <input type="submit" class="btn btn-primary" name="submit" value="Submit">
-                                <input type="reset" class="btn btn-secondary" name="reset" value="Reset">
-                            </div>
+        
+                            <input type="submit" class="btn btn-primary" name="submit" value="Submit">
+                          
+                        </div>
                         </form>
                     </div>
                 </div>

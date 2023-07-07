@@ -70,37 +70,45 @@ switch ($page){
      case 'input':           
 ?>
     <div class="container mt-3 ">
-        <div class="col-md-4">
+        <div class="col-md-9">
         <?php
                 include 'koneksi.php';
-                $sql = mysqli_query($db,"SELECT MAX(id_peminjaman) FROM peminjaman");
+                $ymd = date('Ymd');
+                $sql = mysqli_query($db,"SELECT MAX(id_peminjaman) FROM peminjaman WHERE tanggal_peminjaman = '$ymd'");
                 $id = json_encode($sql);
                 if ($id) {
-                    $format = "J%04d";
-                    $pisah = substr($id, 1, 4);
+                    $format = '%03d';
+                    $pisah = substr($id, 9, 3);
                     $tambah = intval($id) + 1;
-                    $newId = sprintf($format,$tambah);
+                    $last = sprintf($format,$tambah);
+                    $newId = 'J'.$ymd.$last;
                 }else {
-                    $newId = 'J0001';
+                    $newId = 'J'.$ymd.'001';
                 }
             ?>
             <h2>Form Input Peminjaman</h2>
             <div class="row">
                 <form action="proses_peminjaman.php?aksi=input_pem" method="post">
-                   
-                    <div class="mb-3">
-                        <label class="form-label">ID Peminjaman</label>
-                        <input type="text" class="form-control" value="<?= $newId ?>" name="id_petugas" readonly>
+                   <div class="d-flex gap-2">
+
+                       <div class="">
+                           <label class="form-label">ID Peminjaman</label>
+                        <input type="text" class="form-control" value="<?= $newId ?>" name="id_peminjaman" readonly>
                     </div>
                     
-                    <div class="mb-3">
-                        <label class="form-label">Nama Petugas</label>
-                        <input type="text" class="form-control"  name="nama_petugas" value="<?=$_SESSION['user'] ?>">
+                    <div class="">
+                        <label class="form-label">ID Petugas</label>
+                        <input type="text" class="form-control"  name="id_petugas" value="<?=$_SESSION['id_login'] ?>" readonly>
+                    </div>
+
+                    <div class="">
+                        <label class="form-label">ID Anggota</label>
+                        <input type="text" class="form-control"  name="id_anggota" required>
                     </div>
                     
-                    <div class="mb-3">
+                    <div class="">
                         <label class="form-label">Tanggal Peminjaman</label>
-                        <input class="form-control" type="date" value="<?= date("Y-m-d")?>" name="tgl_pinjam" >
+                        <input class="form-control" type="date" value="<?= date("Y-m-d")?>" name="tgl_pinjam" readonly >
                     </div>
                     <?php
                         $today = strtotime(date("Y-m-d")); // Mendapatkan timestamp hari ini
@@ -108,24 +116,20 @@ switch ($page){
                         
                         // Cek jika tanggal 2 minggu kemudian adalah hari Minggu
                         if (date("l", $twoWeeksLater) === "Sunday") {
-                          $twoWeeksLater = strtotime("+1 day", $twoWeeksLater); // Jika hari Minggu, tambahkan 1 hari
+                            $twoWeeksLater = strtotime("+1 day", $twoWeeksLater); // Jika hari Minggu, tambahkan 1 hari
                         }
                         
                         $desiredDate = date("Y-m-d", $twoWeeksLater); // Mendapatkan tanggal dalam format yang diinginkan
-                                                
-                    ?>
+                        
+                        ?>
 
-                    <div class="mb-3">
+                    <div class="">
                         <label class="form-label">Tanggal Pengembalian</label>
                         <input class="form-control" type="date" name="tgl_kembali" value="<?= $desiredDate?>" readonly>
                     </div>
-
                     
-
-                    <div class="mb-3">
                         <input type="submit" class="btn btn-primary" name="submit" value="Submit">
-                        <input type="reset" class="btn btn-secondary" name="reset" value="Reset">
-                    </div>
+                </div>
                 </form>
             </div>
         </div>
@@ -133,7 +137,7 @@ switch ($page){
 
     <?php
         break;
-            }
+    }
     ?>
 
 <style>
