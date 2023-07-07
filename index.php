@@ -1,11 +1,12 @@
 <?php
 
+session_start();
 
-  if(!isset($_SESSION['user']) && !isset($_SESSION['id_login'])){
-    session_start();
+if (!isset($_SESSION['user']) && !isset($_SESSION['id_login'])) {
+    header('location: login.php');
+    exit;
+}
 
-    header('location:login.php');
-  }
 ?>
 
 <!DOCTYPE html>

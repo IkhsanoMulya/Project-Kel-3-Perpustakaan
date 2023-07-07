@@ -34,7 +34,7 @@
 
         </div>
         <table class="table table-bordered  table-hover table-responsive">
-            <tr class="table-dark">
+            <tr class="table-secondary">
                 <th>No</th>
                 <th>Nama Petugas</th>
                 <th>Username</th>
@@ -54,9 +54,9 @@
                 <td> <?= $row["no_telepon"]; ?></td>
                 
                 <td>
-                    <a href="index.php?p=petugas&page=edit&id_edit=<?=$row["id_petugas"]; ?>" class="btn btn-warning">Edit</a>
+                    <a href="index.php?p=petugas&page=edit&id_edit=<?=$row["id_petugas"]; ?>" class="btn btn-warning"><span data-feather="edit"></a>
                     <a href="proses_petugas.php?p=hapus_user&id_hapus=<?= $row["id_petugas"]; ?>"
-                        onclick="return confirm('Yakin hapus data ?');" class="btn btn-danger"><span data-feather="trash-2" class="align-text-bottom"></span> Hapus</a>
+                        onclick="return confirm('Yakin hapus data ?');" class="btn btn-danger"><span data-feather="trash-2" ></span> </a>
                 </td>
             </tr>
             <?php $i++  ?>
@@ -84,12 +84,11 @@
             ?>
             <h2>Form Input Petugas</h2>
             <div class="row">
-                <form action="proses_user.php?aksi=input_user" method="post">
+                <form action="proses_petugas.php?aksi=input_user" method="post">
                    
-                    <div class="mb-3">
-                        <label class="form-label">ID Petugas</label>
-                        <input type="text" class="form-control" value="<?= $newId ?>" name="id_petugas" readonly>
-                    </div>
+                    
+                        <input type="text" class="form-control" value="<?= $newId ?>" name="id_petugas" hidden>
+                   
                     
                     <div class="mb-3">
                         <label class="form-label">Nama Petugas</label>
@@ -108,17 +107,17 @@
 
                     <div class="mb-3">
                         <label class="form-label">Username</label>
-                        <input type="text" class="form-control" name="username" >
+                        <input type="text" class="form-control" name="username" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password" >
+                        <input type="password" class="form-control" name="password" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" name="confirm_password" >
+                        <input type="password" class="form-control" name="confirm_password" required>
                     </div>
 
                     <div class="mb-3">
@@ -145,11 +144,10 @@
             ?>
             <h2>Form Edit User</h2>
             <div class="row">
-                <form action="proses_user.php?p=edit_user" method="post">
-                <div class="mb-3">
-                        <label class="form-label">ID Petugas</label>
-                        <input type="text" class="form-control" name="id_pengurus" value="<?= $data['id_petugas'] ?>"readonly>
-                    </div>
+                <form action="proses_petugas.php?aksi=edit_user" method="post">
+           
+                    <input type="text" class="form-control" name="id_petugas" value="<?= $data['id_petugas'] ?>" hidden>
+             
                     
                     <div class="mb-3">
                         <label class="form-label">Nama Petugas</label>
@@ -158,7 +156,7 @@
                     
                     <div class="mb-3">
                         <label class="form-label">Alamat</label>
-                        <textarea class="form-control" value="<?= $data['alamat'] ?>" name="alamat"></textarea>
+                        <textarea class="form-control"  name="alamat"><?= $data['alamat'] ?></textarea>
                     </div>
 
                     <div class="mb-3">
@@ -168,17 +166,17 @@
 
                     <div class="mb-3">
                         <label class="form-label">Username </label>
-                        <input type="text" class="form-control" name="username" value="<?= $data['username'] ?>">
+                        <input type="text" class="form-control" name="username" value="<?= $data['username'] ?>" required>
                     </div>
 
                     <div class="mb-3">
                         <label class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password">
+                        <input type="password" class="form-control" name="password" required>
                     </div>
                     
                     <div class="mb-3">
                         <label class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" name="confirm_password">
+                        <input type="password" class="form-control" name="confirm_password" required>
                     </div>
 
                     <div class="mb-3">

@@ -1,6 +1,6 @@
 <?php
     include 'koneksi.php';
-    if($_GET['p']=="input_prd"){
+    if($_GET['aksi']=="input_prd"){
         if (isset($_POST['submit'])) {
             $nama = $_POST['nama'];
             
@@ -23,7 +23,7 @@
         }
     }
 
-    elseif($_GET['p'] == 'edit_prodi'){
+    elseif($_GET['aksi'] == 'edit_prodi'){
         include 'koneksi.php';
         if (isset($_POST['submit'])) {
 
@@ -46,7 +46,7 @@
         }
     }
 
-    elseif($_GET['p'] == 'hapus_prd'){
+    elseif($_GET['aksi'] == 'hapus_prd'){
         $hapus = mysqli_query($db, "DELETE FROM prodi where id_prodi = '$_GET[id_hapus]'");
 
         if($hapus){

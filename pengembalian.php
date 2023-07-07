@@ -23,9 +23,9 @@ switch ($page){
           
 
             </div>
-                <form action="proses_transaksi.php?aksi=create" method="post">
+
                 <table class="table table-bordered">
-                    <tr class="table-dark">
+                    <tr class="table-secondary">
                         <th>No</th>
                         <th>ID Pengembalian</th>
                         <th>ID Peminjaman</th>
@@ -58,7 +58,7 @@ switch ($page){
                     }
                     ?>
                 </table>
-
+                
             </div>
     </div>
 

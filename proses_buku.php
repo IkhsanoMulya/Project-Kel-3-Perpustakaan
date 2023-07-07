@@ -3,7 +3,7 @@
     include 'koneksi.php';
 if ($_GET['aksi'] == 'input_buku') {
     if (isset($_POST['submit'])) {
-        $id = $_POST['id'];
+        $id = $_POST['id_buku'];
         $judul = $_POST['judul'];
         $pengarang = $_POST['pengarang'];
         $penerbit = $_POST['penerbit'];
@@ -28,7 +28,7 @@ if ($_GET['aksi'] == 'input_buku') {
 // UPDATE
 elseif ($_GET['aksi'] == 'edit_buku') {
     if (isset($_POST['submit'])) {
-        $id = $_POST['id'];
+        $id = $_POST['id_buku'];
         $judul = $_POST['judul'];
         $pengarang = $_POST['pengarang'];
         $penerbit = $_POST['penerbit'];

@@ -23,7 +23,7 @@ switch ($page){
             <a href="index.php?p=buku&page=input" class="btn btn-success mb-3" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .90rem;">Tambah buku</a>
         </div>
             <table class="table table-bordered">
-                <tr class="table-dark">
+                <tr class="table-secondary">
                     <th>No</th>
                     <th>Judul</th>
                     <th>Pengarang</th>
@@ -48,9 +48,9 @@ switch ($page){
                         <td> <?php echo $data['nama_rak'] ?> </td>
                         <td> <?php echo $data['stok'] ?> </td>
                         <td> 
+                            <a href="index.php?p=buku&page=edit&id_edit=<?=$data['id_buku']?>" class="btn btn-warning"><span data-feather="edit" ></span> </a>
                             <a href="proses_buku.php?aksi=hapus_buku&id_hapus=<?= $data['id_buku']?> " class="btn btn-danger" 
-                            onclick="return confirm ('Yakin akan menghapus data ?')"><span data-feather="trash-2" class="align-text-bottom"></span> Hapus</a>
-                            <a href="index.php?p=buku&page=edit&id_edit=<?=$data['id_buku']?>" class="btn btn-warning">Edit</a>
+                            onclick="return confirm ('Yakin akan menghapus data ?')"><span data-feather="trash-2" class="align-text-bottom"></span></a>
                         </td>
                     </tr>
                 <?php
@@ -84,48 +84,57 @@ switch ($page){
         <div class="col-md-4">
             <form action="proses_buku.php?aksi=input_buku" method="post">
             
-
-                <div class="mb-3">
-                    <label class="form-label"> ID Buku </label>
-                    <input type="text"name="id_buku" class="form-control" value="<?= $newId ?>" readonly>
+                <div class="mb-1">
+                    <label class="form-label" for="id"> ID Buku </label>
+                    <input type="text" id="id" name="id_buku" class="form-control" value="<?= $newId ?>" readonly>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label"> Judul </label>
-                    <input type="text"name="judul" class="form-control">
+                <div class="mb-1">
+                    <label class="form-label" for="judul"> Judul </label>
+                    <input type="text" name="judul" id="judul" class="form-control" required>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label"> Pengarang </label>
-                    <input type="text"name="pengarang" class="form-control">
+                <div class="mb-1">
+                    <label class="form-label" for="pengarang"> Pengarang </label>
+                    <input type="text" name="pengarang" id="pengarang" class="form-control" required>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label"> Penerbit </label>
-                    <input type="text"name="penerbit" class="form-control">
+                <div class="mb-1">
+                    <label class="form-label" for="penerbit"> Penerbit </label>
+                    <input type="text" name="penerbit" id="penerbit" class="form-control" required>
                 </div>
 
-                <div class="mb-3">
-                    <label class="form-label"> Tahun Terbit </label>
-                    <input type="number"name="tahun_terbit" class="form-control">
+                <div class="mb-1">
+                    <label class="form-label" for="tahun"> Tahun Terbit </label>
+                    <input type="number" name="tahun_terbit" id="tahun" class="form-control" maxlength="4" required>
                 </div>
 
-                <div class="mb-3">
-                        <label class="form-label">Rak</label>
-                        <input type="number" class="form-control" name="rak">
+                <div class="mb-1">
+                    <label class="form-label" for="rak">Rak</label>
+                    <select name="rak" id="rak" class="form-control" required>
+                        <option value=""  >Pilih Rak</option>
+                        <?php
+                            $raks = mysqli_query($db,'SELECT * FROM rak');
+                            foreach ($raks as $rak) {
+                        ?>
+                            <option value="<?= $rak['id_rak'] ?>" ><?=$rak['nama_rak']?></option>
+                        <?php
+                            }
+                        ?>
+                    </select>
                 </div>
 
-                <div class="mb-3">
-                        <label class="form-label">Harga</label>
-                        <input type="number" class="form-control" name="harga">
+                <div class="mb-1">
+                        <label class="form-label" for="harga">Harga</label>
+                        <input type="number" class="form-control" id="harga" name="harga" required>
                 </div>
 
-                <div class="mb-3">
-                        <label class="form-label">Stok</label>
-                        <input type="number" class="form-control" name="stok">
+                <div class="mb-1">
+                        <label class="form-label" for="stok">Stok</label>
+                        <input type="number" class="form-control" id="stok" name="stok" required>
                 </div>
 
-                <div class="mb-3">
+                <div class="mb-1">
                     <input type="submit" name="submit" class="btn btn-primary">
                     <input type="reset" name="reset" class="btn btn-secondary">
                 </div>
@@ -145,38 +154,49 @@ switch ($page){
         ?>
         <h3>Edit Data buku</h3>
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-md-4">
             <form action="proses_buku.php?aksi=edit_buku" method="post">
 
-            <div class="mb-3">
+            <div class="mb-1">
                     <label class="form-label"> ID Buku </label>
                     <input type="text"name="id_buku" class="form-control" value="<?= $data['id_buku'] ?>" readonly>
                 </div>
-                <div class="mb-3">
+                <div class="mb-1">
                     <label class="form-label"> Judul </label>
                     <input type="text"name="judul" class="form-control" value="<?= $data['judul'] ?>">
                 </div>
-                <div class="mb-3">
+                <div class="mb-1">
                     <label class="form-label"> Pengarang </label>
                     <input type="text"name="pengarang" class="form-control" value="<?= $data['pengarang'] ?>">
                 </div>
-                <div class="mb-3">
+                <div class="mb-1">
                     <label class="form-label"> Penerbit </label>
                     <input type="text"name="penerbit" class="form-control" value="<?= $data['penerbit'] ?>">
                 </div>
-                <div class="mb-3">
+
+                <div class="mb-1">
                     <label class="form-label"> Tahun Terbit </label>
                     <input type="number"name="tahun_terbit" class="form-control" value="<?= $data['tahun_terbit'] ?>">
                 </div>
-                <div class="mb-3">
-                        <label class="form-label">Rak</label>
-                        <input type="number" class="form-control" name="rak" value="<?= $data['nama_rak'] ?>">
+                <div class="mb-1">
+                    <label class="form-label" for="rak">Rak</label>
+                    <select name="rak" id="rak" class="form-control">
+                <?php
+                    
+                    $raks = mysqli_query($db,'SELECT * FROM rak');
+                    foreach ($raks as $rak) {
+                ?>
+                    <option value="<?= $rak['id_rak'] ?>" <?php $rak['id_rak'] == $data['id_rak'] ? 'selected' : '' ?> ><?=$rak['nama_rak']?></option>
+                <?php
+                    }
+                ?>
+                    </select>
                 </div>
-                <div class="mb-3">
+                <div class="mb-1">
                         <label class="form-label">Harga</label>
                         <input type="number" class="form-control" name="harga" value="<?= $data['harga'] ?>">
                 </div>
-                <div class="mb-3">
+                <div class="mb-1">
                         <label class="form-label">Stok</label>
                         <input type="number" class="form-control" name="stok" value="<?= $data['stok'] ?>">
                 </div>

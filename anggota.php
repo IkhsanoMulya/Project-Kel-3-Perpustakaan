@@ -6,7 +6,7 @@
     switch($page){
         case 'list':
 
-            $anggota = mysqli_query($db, "SELECT * FROM anggota");
+            $anggota = mysqli_query($db, "SELECT * FROM anggota INNER JOIN prodi ON anggota.id_prodi = prodi.id_prodi");
 ?>
 
 <body>
@@ -31,10 +31,9 @@
             </div>
 
         </div>
-        <div class="card table-responsive">
 
-            <table class="table table-bordered  table-hover ">
-                <tr class="table-dark">
+            <table class="table table-bordered table-hover">
+                <tr class="table-secondary">
                 <th>No</th>
                 <th>Kode Anggota</th>
                 <th>Nama Anggota</th>
@@ -55,15 +54,14 @@
                 <td> <?= $row["alamat"]; ?></td>
                 <td> <?= $row["no_telepon"]; ?></td>
                 <td>
-                    <a href="index.php?p=petugas&page=edit&id_edit=<?=$row["id_anggota"]; ?>" class="btn btn-warning">Edit</a>
+                    <a href="index.php?p=petugas&page=edit&id_edit=<?=$row["id_anggota"]; ?>" class="btn btn-warning"><span data-feather="edit"></a>
                     <a href="proses_petugas.php?p=hapus_user&id_hapus=<?= $row["id_anggota"]; ?>"
-                        onclick="return confirm('Yakin hapus data ?');" class="btn btn-danger"><span data-feather="trash-2" class="align-text-bottom"></span> Hapus</a>
+                        onclick="return confirm('Yakin hapus data ?');" class="btn btn-danger"><span data-feather="trash-2" ></span></a>
                 </td>
             </tr>
             <?php $i++  ?>
             <?php endforeach;  ?>
         </table>
-    </div>
     </div>
     <?php
         break;

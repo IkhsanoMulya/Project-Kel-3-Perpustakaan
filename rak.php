@@ -28,18 +28,17 @@
             <div class="col-md-4">
                 <a href="index.php?p=rak&page=input" class="btn btn-success mb-3" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .90rem;">Tambah Rak</a>
             </div>
-        <form action="proses_rak.php?aksi=create" method="post">
         <table class="table table-bordered">
-            <tr class="table-dark">
+            <tr class="table-secondary">
                 <th>No</th>
                 <th>Nama Rak</th>
-                <?php
+                <!-- <?php
                     if ($_SESSION['level']=='admin'){
-                ?>
+                ?> -->
                 <th>Aksi</th>
-                <?php
+                <!-- <?php
                     }
-                ?>
+                ?> -->
             </tr>
             <?php $i = 1  ?>
             <?php foreach ($rak as $row) : ?>
@@ -50,9 +49,9 @@
                     if ($_SESSION['level']=='admin'){
                 ?>
                 <td>
-                    <a href="index.php?p=rak&page=edit&id_edit=<?=$row["id_rak"]; ?>" class="btn btn-warning">Edit</a>
+                    <a href="index.php?p=rak&page=edit&id_edit=<?=$row["id_rak"]; ?>" class="btn btn-warning"><span data-feather="edit"></a>
                     <a href="proses_rak.php?aksi=hapus_rak&id_hapus=<?= $row["id_rak"]; ?>"
-                        onclick="return confirm('Yakin hapus data ?');" class="btn btn-danger"><span data-feather="trash-2" class="align-text-bottom"></span> Hapus</a>
+                        onclick="return confirm('Yakin hapus data ?');" class="btn btn-danger"><span data-feather="trash-2"></span></a>
                 </td>
                 <?php
                     }
@@ -75,7 +74,7 @@
                 <form action="proses_rak.php?aksi=input_rak" method="post">
                     <div class="mb-3">
                         <label class="form-label">Nama Rak </label>
-                        <input type="text" class="form-control" name="nama">
+                        <input type="text" class="form-control" name="nama" required>
                     </div>
                    
                     <div class="mb-3">
@@ -106,7 +105,7 @@
                 <input type="hidden" class="form-control" name="id" value="<?= $_GET['id_edit']?>">
                     <div class="mb-3">
                         <label class="form-label">Nama rak</label>
-                        <input type="text" class="form-control" name="nama" value="<?= $data['nama_rak'] ?>">
+                        <input type="text" class="form-control" name="nama" value="<?= $data['nama_rak'] ?>" required>
                     </div>
                     
                     <div class="mb-3">

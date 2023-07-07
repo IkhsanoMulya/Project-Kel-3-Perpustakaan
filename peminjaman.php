@@ -22,12 +22,11 @@ switch ($page){
             <a class="btn btn-success mb-3" href="index.php?p=peminjaman&page=input" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .90rem;">Tambah Peminjaman</a>
         
             </div>
-                <form action="proses_transaksi.php?aksi=create" method="post">
                 <table class="table table-bordered">
-                    <tr class="table-dark">
+                    <tr class="table-secondary">
                         <th>No</th>
                         <th>ID Peminjaman</th>
-                        <th>ID Anggota</th>
+                        <th>Nama Anggota</th>
                         <th>Tanggal Pinjam</th>
                         <th>Tanggal Kembali</th>
                         <th>Petugas</th>
@@ -37,7 +36,9 @@ switch ($page){
                     include 'koneksi.php';
 
                     $ambil = mysqli_query($db, "SELECT * FROM peminjaman INNER JOIN 
-                        petugas ON petugas.id_petugas=peminjaman.id_petugas ORDER BY tanggal_peminjaman DESC");
+                        petugas ON petugas.id_petugas=peminjaman.id_petugas
+                        INNER JOIN anggota ON anggota.id_anggota=peminjaman.id_anggota
+                        ORDER BY tanggal_peminjaman DESC");
 
                     $no = 1;
                     while ($data = mysqli_fetch_array($ambil)) {
@@ -47,9 +48,10 @@ switch ($page){
                         <tr>
                             <td> <?php echo $no ?> </td>
                             <td> <?php echo $data['id_peminjaman'] ?> </td>
-                            <td> <?php echo $data['id_anggota'] ?> </td>
+                            <td> <?php echo $data['nama_anggota'] ?> </td>
                             <td> <?php echo $data['tanggal_peminjaman'] ?> </td>
                             <td> <?php echo $data['tanggal_pengembalian'] ?> </td>
+                            <td> <?php echo $data['nama_petugas'] ?> </td>
                             <td>
                                 <a href="index.php?p=detail&page=list&id_peminjaman=<?= $data['id_peminjaman'] ?>" class="btn btn-primary">Detail</a>
                             </td>

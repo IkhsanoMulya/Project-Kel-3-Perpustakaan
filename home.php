@@ -11,6 +11,13 @@
       <div class="card text-white bg-danger mb-3 shadow rounded">
         <div class="card-body">
           <h6 class="card-title">Pengunjung Hari ini</h6>
+          <?php
+            include 'koneksi.php';
+            $tanggalNow = date('Ymd');
+            $jumlah = 'SELECT id_peminjaman FROM peminjaman WHERE tanggal_peminjaman = '.$tanggalNow;
+            $peminjam = mysqli_query($db,$jumlah);
+            $jumlahPinjam = mysqli_num_rows($peminjam);
+          ?>
           <h2 class="card-text text-center min-height-200">12</h2>
         </div>
       </div>
@@ -19,7 +26,7 @@
       <div class="card text-dark bg-warning mb-3 shadow rounded">
         <div class="card-body ">
           <h6 class="card-title">Peminjaman Hari Ini</h6>
-          <h2 class="card-text text-center min-height-200">14</h2>
+          <h2 class="card-text text-center min-height-200"><?= $jumlahPinjam?></h2>
         </div>
       </div>
     </div>

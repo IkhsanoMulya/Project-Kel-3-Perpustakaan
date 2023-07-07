@@ -2,6 +2,7 @@
     include 'koneksi.php';
     if($_GET['aksi']=="input_user"){
         if (isset($_POST['submit'])) {
+            $id = $_POST['id_petugas'];
             $username = $_POST['username'];
             $nama = $_POST['nama_petugas'];
             $alamat = $_POST['alamat'];
@@ -14,7 +15,7 @@
                 // echo $id;
                
                 //query
-                $sql = mysqli_query($db, "INSERT INTO petugas (id,nama_petugas,alamat,no_telepon,username,password,level)
+                $sql = mysqli_query($db, "INSERT INTO petugas (id_petugas,nama_petugas,alamat,no_telepon,username,password,level)
                                         VALUES ('$id','$nama','$alamat','$no','$username','$password','staff')
                                    ");
                 if ($sql) {
@@ -59,7 +60,7 @@
                 nama_petugas = '$nama',
                 alamat = '$alamat',
                 no_telepon = '$no'
-                WHERE id = '$_POST[id]'");
+                WHERE id_petugas = '$_POST[id_petugas]'");
 
                 if ($sql) {
                     echo "
