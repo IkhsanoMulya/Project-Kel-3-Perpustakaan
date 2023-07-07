@@ -36,15 +36,27 @@ elseif ($_GET['aksi'] == 'edit_rak') {
 // DELETE
 elseif ($_GET['aksi'] == 'hapus_rak') {
     $id = $_GET['id_hapus'];
-    $hapus = mysqli_query($db, "DELETE FROM rak WHERE id_rak='$id'");
-
-    if ($hapus) {
+    $child = mysqli_query($db,"SELECT id_rak FROM buku WHERE id_rak ='$id'");
+    $bisa = mysqli_num_rows($child);
+    
+    if ($bisa == 0 ) {
+        $hapus = mysqli_query($db, "DELETE FROM rak WHERE id_rak='$id'");
         echo "<script>
             alert('Data Berhasil Dihapus !');
-            document.location.href = 'index.php?p=rak';
+            window.location = 'index.php?p=rak';
             </script>";
-    } else {
-        echo 'Gagal menghapus data';
+    } else if($bisa > 0){
+        echo "
+            <script>
+                alert('Masih Ada Buku di Rak Ini!');
+                window.location = 'index.php?p=rak';
+            </script>";
+    }else{
+        echo "
+            <script>
+                alert('Data Gagal Dihapus');
+                window.location = 'index.php?p=rak';
+            </script>";
     }
 }
 

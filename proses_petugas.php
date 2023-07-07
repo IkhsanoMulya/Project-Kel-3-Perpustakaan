@@ -90,18 +90,43 @@
     }
 
     elseif($_GET['aksi'] == 'hapus_user'){
-        $hapus = mysqli_query($db, "DELETE FROM petugas where id = '$_GET[id_hapus]'");
 
-        if($hapus){
+        $child = mysqli_query($db,"SELECT id_petugas FROM peminjaman WHERE id_petugas ='$id'");
+        $bisa = mysqli_num_rows($child);
+        
+        if ($bisa == 0 ) {
+            $hapus = mysqli_query($db, "DELETE FROM petugas WHERE id_petugas='$id'");
             echo "<script>
-            alert('Data Berhasil Dihapus !');
-            document.location.href = 'index.php?p=petugas';
-            </script>";
-        }else {
+                alert('Data Berhasil Dihapus !');
+                window.location = 'index.php?p=petugas';
+                </script>";
+        } else if($bisa > 0){
+            $child = mysqli_query($db,"UPDATE peminjaman SET id_petugas = 'P0000' WHERE id_petugas ='$id'");
+            $hapus = mysqli_query($db, "DELETE FROM petugas WHERE id_petugas='$id'");
             echo "
                 <script>
-                    alert('data gagal  dihapus !');
+                    alert('Anggota Masih Memiliki Peminjaman Aktif!');
+                    window.location = 'index.php?p=petugas';
+                </script>";
+        }else{
+            echo "
+                <script>
+                    alert('Data Gagal Dihapus');
+                    window.location = 'index.php?p=petugas';
                 </script>";
         }
+        // $hapus = mysqli_query($db, "DELETE FROM petugas where id = '$_GET[id_hapus]'");
+
+        // if($hapus){
+        //     echo "<script>
+        //     alert('Data Berhasil Dihapus !');
+        //     document.location.href = 'index.php?p=petugas';
+        //     </script>";
+        // }else {
+        //     echo "
+        //         <script>
+        //             alert('data gagal  dihapus !');
+        //         </script>";
+        // }
     }
 ?>

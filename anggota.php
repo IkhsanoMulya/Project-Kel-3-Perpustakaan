@@ -54,8 +54,8 @@
                 <td> <?= $row["alamat"]; ?></td>
                 <td> <?= $row["no_telepon"]; ?></td>
                 <td>
-                    <a href="index.php?p=petugas&page=edit&id_edit=<?=$row["id_anggota"]; ?>" class="btn btn-warning"><span data-feather="edit"></a>
-                    <a href="proses_petugas.php?p=hapus_user&id_hapus=<?= $row["id_anggota"]; ?>"
+                    <a href="index.php?p=anggota&page=edit&id_edit=<?=$row["id_anggota"]; ?>" class="btn btn-warning"><span data-feather="edit"></a>
+                    <a href="proses_anggota.php?aksi=hapus_ang&id_hapus=<?= $row["id_anggota"]; ?>"
                         onclick="return confirm('Yakin hapus data ?');" class="btn btn-danger"><span data-feather="trash-2" ></span></a>
                 </td>
             </tr>
@@ -69,14 +69,53 @@
             
     ?>
 
-<div class="container mt-3 ">
+<div class="container">
         <div class="col-md-4">
             <h2>Form Input Anggota</h2>
             <div class="row">
-                <form action="proses_user.php?p=input_user" method="post">
+                <form action="proses_anggota.php?aksi=input_ang" method="post">
                    
-                    
-                    <div class="mb-3">
+                <div class="">
+                    <label class="form-label" for="id"> ID Anggota </label>
+                    <input type="text" id="id" name="id_anggota" class="form-control" pattern="[0-9]*" maxlength="10" required>
+                </div>
+
+                <div class="">
+                    <label class="form-label" for="nama"> Nama </label>
+                    <input type="text" name="nama" id="nama" class="form-control" required>
+                </div>
+
+                <div class="">
+                    <label class="form-label" for="alamat"> Alamat </label>
+                    <textarea name="alamat" id="alamat" class="form-control" required></textarea>
+                </div>
+
+                <div class="">
+                    <label class="form-label" for="tanggal lahir"> Tanggal Lahir </label>
+                    <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control" required>
+                </div>
+
+                <div class="">
+                    <label class="form-label" for="telepon"> No. Telepon </label>
+                    <input type="text" name="no_telepon" id="telepon" pattern="[0-9]*" class="form-control" maxlength="15" required>
+                </div>
+
+                <div class="">
+                    <label class="form-label" for="prodi">Prodi</label>
+                    <select name="id_prodi" id="prodi" class="form-control" required>
+                        <option value=""  >Pilih prodi</option>
+                        <?php
+                            $prodis = mysqli_query($db,'SELECT * FROM prodi');
+                            foreach ($prodis as $prodi) {
+                        ?>
+                            <option value="<?= $prodi['id_prodi'] ?>" ><?=$prodi['nama_prodi']?></option>
+                        <?php
+                            }
+                        ?>
+                    </select>
+                </div>
+                    <div class="mt-2">
+
                         <input type="submit" class="btn btn-primary" name="submit" value="Submit">
                         <input type="reset" class="btn btn-secondary" name="reset" value="Reset">
                     </div>
@@ -89,79 +128,63 @@
         break;
         case 'edit':
     ?>
-    <div class="container mt-3 ">
+    <div class="container ">
         <div class="col-md-4">
             <?php
             include 'koneksi.php';
 
-            $edit = mysqli_query($db, "SELECT * FROM user WHERE id_pengurus='$_GET[id_edit]'");
+            $edit = mysqli_query($db, "SELECT * FROM anggota WHERE id_anggota='$_GET[id_edit]'");
             $data = mysqli_fetch_array($edit);
 
             ?>
-            <h2>Form Edit User</h2>
+            <h2>Form Edit Anggota</h2>
             <div class="row">
-                <form action="proses_user.php?p=edit_user" method="post">
-                <div class="mb-3">
-                        <label class="form-label">ID Pengurus</label>
-                        <input type="text" class="form-control" name="id_pengurus" value="<?= $data['id_pengurus'] ?>"readonly>
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Username </label>
-                        <input type="text" class="form-control" name="username" value="<?= $data['username'] ?>">
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Password</label>
-                        <input type="password" class="form-control" name="password">
-                    </div>
-                    
-                    <div class="mb-3">
-                        <label class="form-label">Confirm Password</label>
-                        <input type="password" class="form-control" name="confirm_password">
-                    </div>
-
-                    <!-- <div class="mb-3">
-                    <label class="form-label"> Level </label>
-                        <select name="level" class="form-select">
-                        <?php
-                            $user=mysqli_query($db,"SELECT * FROM user");
-                            while($data_user=mysqli_fetch_array($user)){
-                            $terpilih=($data['id_pengurus']==$data_user['id_pengurus']) ? 'selected' : ''; //ternary
-                        ?> 
-                            <option value="<?= $data_user['level']?>"<?= $terpilih ?>> <?=$data_user['level']?> </option> 
-
-                        <?php
-                        }
-                        ?>
-                        </select>
-                    </div> -->
-
-                    <div class="mb-3">
-                    <label class="form-label">Level</label>
-                        <div class="form-check">
-                        <input class="form-check-input" type="radio" name="level" value="admin" <?php if ($data['level']=='admin') echo 'checked'?>>
-                            <label class="form-check-label">Admin</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="level" value="sekretaris" <?= ($data['level']=='sekretaris') ? 'checked' : ''?>>
-                        <label class="form-check-label">Sekretaris</label>
-                        </div>
-                        <div class="form-check">
-                        <input class="form-check-input" type="radio" name="level" value="bendahara" <?php if ($data['level']=='bendahara') echo 'checked'?>>
-                            <label class="form-check-label">Bendahara</label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="level" value="danus" <?= ($data['level']=='danus') ? 'checked' : ''?>>
-                        <label class="form-check-label">Danus</label>
-                        </div>
-                    </div>
-
-                    <div class="mb-3">
-                        <input type="submit" class="btn btn-primary" name="submit" value="Submit">
-                        <input type="reset" class="btn btn-secondary" name="reset" value="Reset">
-                    </div>
-                </form>
+            <form action="proses_anggota.php?aksi=edit_ang" method="post">
+                   
+                   <div class="">
+                       <label class="form-label" for="id"> ID Anggota </label>
+                       <input type="text" id="id" name="id_anggota" value="<?= $data['id_anggota'] ?>" class="form-control" pattern="[0-9]*" maxlength="10" readonly required>
+                   </div>
+   
+                   <div class="">
+                       <label class="form-label" for="nama"> Nama </label>
+                       <input type="text" name="nama" id="nama" class="form-control" value="<?= $data['nama_anggota'] ?>" required>
+                   </div>
+   
+                   <div class="">
+                       <label class="form-label" for="alamat"> Alamat </label>
+                       <textarea name="alamat" id="alamat" class="form-control" required><?= $data['id_anggota'] ?></textarea>
+                   </div>
+   
+                   <div class="">
+                       <label class="form-label" for="tanggal lahir"> Tanggal Lahir </label>
+                       <input type="date" name="tanggal_lahir" id="tanggal_lahir" class="form-control" value="<?= $data['tanggal_lahir'] ?>" required>
+                   </div>
+   
+                   <div class="">
+                       <label class="form-label" for="telepon"> No. Telepon </label>
+                       <input type="text" name="no_telepon" id="telepon" pattern="[0-9]*" value="<?= $data['no_telepon'] ?>" class="form-control" maxlength="15" required>
+                   </div>
+   
+                   <div class="">
+                       <label class="form-label" for="prodi">Prodi</label>
+                       <select name="id_prodi" id="prodi" class="form-control" required>
+                           <?php
+                               $prodis = mysqli_query($db,'SELECT * FROM prodi');
+                               foreach ($prodis as $prodi) {
+                           ?>
+                               <option value="<?= $prodi['id_prodi'] ?>" <?php $prodi['id_prodi'] == $data['id_prodi'] ? 'selected' : ''?>  ><?=$prodi['nama_prodi']?></option>
+                           <?php
+                               }
+                           ?>
+                       </select>
+                   </div>
+                       <div class="mt-2">
+   
+                           <input type="submit" class="btn btn-primary" name="submit" value="Submit">
+                           <input type="reset" class="btn btn-secondary" name="reset" value="Reset">
+                       </div>
+                   </form>
             </div>
         </div>
     </div>

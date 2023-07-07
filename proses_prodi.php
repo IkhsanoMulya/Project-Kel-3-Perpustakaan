@@ -47,13 +47,28 @@
     }
 
     elseif($_GET['aksi'] == 'hapus_prd'){
-        $hapus = mysqli_query($db, "DELETE FROM prodi where id_prodi = '$_GET[id_hapus]'");
-
-        if($hapus){
+        $id = $_GET['id_hapus'];
+        $child = mysqli_query($db,"SELECT id_prodi FROM anggota WHERE id_prodi ='$id'");
+        $bisa = mysqli_num_rows($child);
+        
+        if ($bisa == 0 ) {
+            $hapus = mysqli_query($db, "DELETE FROM prodi WHERE id_prodi='$id'");
             echo "<script>
-            alert('Data Berhasil Dihapus !');
-            document.location.href = 'index.php?p=prodi';
-            </script>";
+                alert('Data Berhasil Dihapus !');
+                window.location = 'index.php?p=prodi';
+                </script>";
+        } else if($bisa > 0){
+            echo "
+                <script>
+                    alert('Masih Ada Anggota di Prodi Ini!');
+                    window.location = 'index.php?p=prodi';
+                </script>";
+        }else{
+            echo "
+                <script>
+                    alert('Data Gagal Dihapus');
+                    window.location = 'index.php?p=prodi';
+                </script>";
         }
     }
 ?>

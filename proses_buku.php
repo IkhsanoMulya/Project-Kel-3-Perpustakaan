@@ -1,4 +1,4 @@
-// CREATE
+
 <?php
     include 'koneksi.php';
 if ($_GET['aksi'] == 'input_buku') {
@@ -51,16 +51,29 @@ elseif ($_GET['aksi'] == 'edit_buku') {
 // DELETE
 elseif ($_GET['aksi'] == 'hapus_buku') {
     $id = $_GET['id_hapus'];
-    $hapus = mysqli_query($db, "DELETE FROM buku WHERE id_buku='$id'");
-
-    if ($hapus) {
+    $child = mysqli_query($db,"SELECT id_buku FROM detail_peminjaman WHERE id_buku ='$id'");
+    $bisa = mysqli_num_rows($child);
+    
+    if ($bisa == 0 ) {
+        $hapus = mysqli_query($db, "DELETE FROM buku WHERE id_buku='$id'");
         echo "<script>
             alert('Data Berhasil Dihapus !');
-            document.location.href = 'index.php?p=buku';
+            window.location = 'index.php?p=buku';
             </script>";
-    } else {
-        echo 'Gagal menghapus data';
+    } else if($bisa > 0){
+        echo "
+            <script>
+                alert('Buku Masih Dipinjam!');
+                window.location = 'index.php?p=buku';
+            </script>";
+    }else{
+        echo "
+            <script>
+                alert('Data Gagal Dihapus');
+                window.location = 'index.php?p=buku';
+            </script>";
     }
+  
 }
 
 ?>

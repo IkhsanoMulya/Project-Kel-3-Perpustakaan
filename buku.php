@@ -6,7 +6,7 @@ switch ($page){
 ?>
 
 <div class="container">
-        <div class="row mb-2">
+        <div class="row mt-2">
         <?php
             $pesan=isset($_GET['msg']) ? $_GET['msg'] : '';
             if ($pesan =='ok'){
@@ -84,32 +84,32 @@ switch ($page){
         <div class="col-md-4">
             <form action="proses_buku.php?aksi=input_buku" method="post">
             
-                <div class="mb-1">
+                <div class="">
                     <label class="form-label" for="id"> ID Buku </label>
                     <input type="text" id="id" name="id_buku" class="form-control" value="<?= $newId ?>" readonly>
                 </div>
 
-                <div class="mb-1">
+                <div class="">
                     <label class="form-label" for="judul"> Judul </label>
                     <input type="text" name="judul" id="judul" class="form-control" required>
                 </div>
 
-                <div class="mb-1">
+                <div class="">
                     <label class="form-label" for="pengarang"> Pengarang </label>
                     <input type="text" name="pengarang" id="pengarang" class="form-control" required>
                 </div>
 
-                <div class="mb-1">
+                <div class="">
                     <label class="form-label" for="penerbit"> Penerbit </label>
                     <input type="text" name="penerbit" id="penerbit" class="form-control" required>
                 </div>
 
-                <div class="mb-1">
+                <div class="">
                     <label class="form-label" for="tahun"> Tahun Terbit </label>
-                    <input type="number" name="tahun_terbit" id="tahun" class="form-control" maxlength="4" required>
+                    <input type="text" name="tahun_terbit" id="tahun" class="form-control" maxlength="4" required>
                 </div>
 
-                <div class="mb-1">
+                <div class="">
                     <label class="form-label" for="rak">Rak</label>
                     <select name="rak" id="rak" class="form-control" required>
                         <option value=""  >Pilih Rak</option>
@@ -124,17 +124,17 @@ switch ($page){
                     </select>
                 </div>
 
-                <div class="mb-1">
+                <div class="">
                         <label class="form-label" for="harga">Harga</label>
                         <input type="number" class="form-control" id="harga" name="harga" required>
                 </div>
 
-                <div class="mb-1">
+                <div class="">
                         <label class="form-label" for="stok">Stok</label>
                         <input type="number" class="form-control" id="stok" name="stok" required>
                 </div>
 
-                <div class="mb-1">
+                <div class="mt-2">
                     <input type="submit" name="submit" class="btn btn-primary">
                     <input type="reset" name="reset" class="btn btn-secondary">
                 </div>
@@ -157,28 +157,28 @@ switch ($page){
             <div class="col-md-4">
             <form action="proses_buku.php?aksi=edit_buku" method="post">
 
-            <div class="mb-1">
+            <div class="">
                     <label class="form-label"> ID Buku </label>
                     <input type="text"name="id_buku" class="form-control" value="<?= $data['id_buku'] ?>" readonly>
                 </div>
-                <div class="mb-1">
+                <div class="">
                     <label class="form-label"> Judul </label>
                     <input type="text"name="judul" class="form-control" value="<?= $data['judul'] ?>">
                 </div>
-                <div class="mb-1">
+                <div class="">
                     <label class="form-label"> Pengarang </label>
                     <input type="text"name="pengarang" class="form-control" value="<?= $data['pengarang'] ?>">
                 </div>
-                <div class="mb-1">
+                <div class="">
                     <label class="form-label"> Penerbit </label>
                     <input type="text"name="penerbit" class="form-control" value="<?= $data['penerbit'] ?>">
                 </div>
 
-                <div class="mb-1">
+                <div class="">
                     <label class="form-label"> Tahun Terbit </label>
                     <input type="number"name="tahun_terbit" class="form-control" value="<?= $data['tahun_terbit'] ?>">
                 </div>
-                <div class="mb-1">
+                <div class="">
                     <label class="form-label" for="rak">Rak</label>
                     <select name="rak" id="rak" class="form-control">
                 <?php
@@ -192,16 +192,16 @@ switch ($page){
                 ?>
                     </select>
                 </div>
-                <div class="mb-1">
+                <div class="">
                         <label class="form-label">Harga</label>
                         <input type="number" class="form-control" name="harga" value="<?= $data['harga'] ?>">
                 </div>
-                <div class="mb-1">
+                <div class="">
                         <label class="form-label">Stok</label>
                         <input type="number" class="form-control" name="stok" value="<?= $data['stok'] ?>">
                 </div>
             
-            <div class="mb-2">
+            <div class="mt-2">
                 <input type="submit" class="btn btn-primary" name="submit" value="Submit">
                 <input type="Reset" class="btn btn-secondary" name="reset" value="Reset">
             </div>
