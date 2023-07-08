@@ -18,7 +18,8 @@ switch ($page){
                 </tr>
                 <?php
                     include 'koneksi.php';
-                    $ambil = mysqli_query($db,"SELECT * FROM absensi join anggota on(absensi.id_anggota = anggota.id_anggota) ORDER BY waktu");
+                    $ymd = date('Ymd');
+                    $ambil = mysqli_query($db,"SELECT * FROM absensi join anggota on(absensi.id_anggota = anggota.id_anggota) WHERE tanggal = '$ymd'");
                     $no = 1;
                     while($data = mysqli_fetch_array($ambil)){
                 ?>

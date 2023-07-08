@@ -125,7 +125,7 @@ switch ($page){
                     
                     <div class="">
                         <label class="form-label" for="rak">Rak</label>
-                        <select name="rak" id="rak" class="form-control" required>
+                        <select name="rak" id="rak" class="form-select" required>
                         <option value=""  >Pilih Rak</option>
                         <?php
                             $raks = mysqli_query($db,'SELECT * FROM rak');
@@ -212,7 +212,7 @@ switch ($page){
                 </div>
                 <div class="">
                     <label class="form-label" for="rak">Rak</label>
-                    <select name="rak" id="rak" class="form-control">
+                    <select name="rak" id="rak" class="form-select">
                 <?php
                     
                     $raks = mysqli_query($db,'SELECT * FROM rak');

@@ -102,7 +102,7 @@
 
                 <div class="">
                     <label class="form-label" for="prodi">Prodi</label>
-                    <select name="id_prodi" id="prodi" class="form-control" required>
+                    <select name="id_prodi" id="prodi" class="form-select" required>
                         <option value=""  >Pilih prodi</option>
                         <?php
                             $prodis = mysqli_query($db,'SELECT * FROM prodi');
@@ -168,7 +168,7 @@
    
                    <div class="">
                        <label class="form-label" for="prodi">Prodi</label>
-                       <select name="id_prodi" id="prodi" class="form-control" required>
+                       <select name="id_prodi" id="prodi" class="form-select" required>
                            <?php
                                $prodis = mysqli_query($db,'SELECT * FROM prodi');
                                foreach ($prodis as $prodi) {

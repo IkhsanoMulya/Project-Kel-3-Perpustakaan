@@ -13,7 +13,7 @@
           <?php
             include 'koneksi.php';
             $tanggalNow = date('Ymd');
-            $pengunjung = 'SELECT id_anggota FROM absensi WHERE tanggal = '.$tanggalNow;
+            $pengunjung = 'SELECT DISTINCT id_anggota FROM absensi WHERE tanggal = '.$tanggalNow;
             $query = mysqli_query($db,$pengunjung);
             $jumlahPengunjung = mysqli_num_rows($query);
             
@@ -79,16 +79,17 @@
           }
         ?>
     
-    <div class="col-md-5">
+    <div class="col-md-12 mt-3">
         <form action="" method="post">
 
-            <div class="mb-3">
-              <label class="form-label" for="absen">Absensi</label>
-              <input type="text" class="form-control" name="absen" pattern="[0-9]*" maxlength="10" required>
-            </div>
-
+            <div class="col-md-12 d-flex gap-2">
+              <label class="form-label " for="absen">Absensi</label>
+              <input type="text" class="form-control" name="absen" placeholder="Masukkan ID Anggota" pattern="[0-9]*" maxlength="10" required>
+           
+         
             <input type="submit" class="btn btn-primary" name="submit" value="Submit">
             <input type="reset" class="btn btn-secondary" name="reset" value="Reset">
+          </div>
         </form>
 
         <?php
@@ -108,11 +109,21 @@
           }
         ?>
     </div>
-    
+
+    <!-- <div class="col-md-12 mt-3 h-100">
+      <div class="card text-dark bg-light shadow-sm rounded">
+        <div class="card-body ">
+          <h6 class="card-title">Quote Hari Ini</h6>
+          <h2 class="card-text text-center min-height-200"></h2>
+        </div>
+      </div>
+    </div> -->
+
   </div>
 </div>
 
       
   </div>
+
 </div>
 </body>

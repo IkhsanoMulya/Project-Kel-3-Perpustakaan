@@ -71,7 +71,7 @@ if (!isset($_SESSION['user']) && !isset($_SESSION['id_login'])) {
       </li>
       <li class="nav-item">
         <a class="nav-link <?php echo  (isset($_GET['p']) && $_GET['p'] == 'absensi' ? 'active' : ''); ?>" href="index.php?p=absensi">
-          <span data-feather="users"></span>
+          <span data-feather="bookmark"></span>
           Absensi
         </a>
       </li>
