@@ -29,28 +29,34 @@ switch ($page){
                         <th>No</th>
                         <th>ID Pengembalian</th>
                         <th>ID Peminjaman</th>
+                        <th>Nama Anggota</th>
                         <th>Tanggal Kembali</th>
+                        <th>Petugas</th>
                         <th>Aksi</th>
                     </tr>
                     <?php
                     include 'koneksi.php';
 
-                    $ambil = mysqli_query($db, "SELECT * FROM peminjaman INNER JOIN 
-                        petugas ON petugas.id_petugas=peminjaman.id_petugas ORDER BY tanggal_peminjaman DESC");
+                    $ambil = mysqli_query($db, "SELECT id_pengembalian, peminjaman.id_peminjaman as idP, 
+                    pengembalian.tanggal_pengembalian as tglK, nama_petugas , nama_anggota FROM pengembalian
+                    INNER JOIN peminjaman ON peminjaman.id_peminjaman=pengembalian.id_peminjaman
+                    INNER JOIN anggota ON anggota.id_anggota=peminjaman.id_anggota    
+                    INNER JOIN petugas ON petugas.id_petugas=peminjaman.id_petugas    
+                    ORDER BY pengembalian.tanggal_pengembalian DESC");
 
                     $no = 1;
                     while ($data = mysqli_fetch_array($ambil)) {
-                        //hitung jumlah
-                        $id_peminjaman = $data['id_peminjaman'];
+                        
                         ?>
                         <tr>
                             <td> <?php echo $no ?> </td>
-                            <td> <?php echo $data['id_peminjaman'] ?> </td>
-                            <td> <?php echo $data['id_anggota'] ?> </td>
-                            <td> <?php echo $data['tanggal_peminjaman'] ?> </td>
-                            <td> <?php echo $data['tanggal_pengembalian'] ?> </td>
+                            <td> <?php echo $data['id_pengembalian'] ?> </td>
+                            <td> <?php echo $data['idP'] ?> </td>
+                            <td> <?php echo $data['nama_anggota'] ?> </td>
+                            <td> <?php echo $data['tglK'] ?> </td>
+                            <td> <?php echo $data['nama_petugas'] ?> </td>
                             <td>
-                                <a href="index.php?p=detail&page=list&id_transaksi=<?= $data['id_peminjaman'] ?>" class="btn btn-primary">Detail</a>
+                                <a href="index.php?p=kembali&page=list&id_pengembalian=<?= $data['id_pengembalian'] ?>" class="btn btn-primary">Detail</a>
                             </td>
                         </tr>
                         <?php
@@ -69,19 +75,25 @@ switch ($page){
             <div class="container mt-3 ">
                 <div class="col-md-9">
                 <?php
-                include 'koneksi.php';
-                $ymd = date('Ymd');
-                $sql = mysqli_query($db,"SELECT MAX(id_pengembalian) FROM pengembalian WHERE tanggal_pengembalian = '$ymd'");
-                $id = json_encode($sql);
-                if ($id) {
-                    $format = '%03d';
-                    $pisah = substr($id, 9, 3);
-                    $tambah = intval($id) + 1;
-                    $last = sprintf($format,$tambah);
-                    $newId = 'J'.$ymd.$last;
-                }else {
-                    $newId = 'J'.$ymd.'001';
-                }
+                function getPengId() {
+                    include 'koneksi.php';
+                    $ymd = date('Ymd');
+                    $sql = "SELECT MAX(id_pengembalian) as id from pengembalian";
+            
+                    if ($result = mysqli_query($db, $sql)) {
+                        
+                        $id = mysqli_fetch_assoc($result);
+                        $max_id = $id['id'];
+                        $rowcount = intval(substr($max_id,10,3));
+                    }
+                    $newNumber = ($rowcount) + 1;
+            
+                    $paddedNumber = str_pad($newNumber, 3, '0', STR_PAD_LEFT);
+                    
+                    $transactionNumber = "K" .$ymd. $paddedNumber;
+                    
+                    return $transactionNumber;
+                    }
             ?>
                     <h2>Form Input Pengembalian</h2>
                     <div class="row">
@@ -90,7 +102,7 @@ switch ($page){
 
                                <div class="">
                                    <label class="form-label">ID Pengembalian</label>
-                                <input type="text" class="form-control" value="<?= $newId ?>" name="id_pengembalian" readonly>
+                                <input type="text" class="form-control" value="<?= getPengId() ?>" name="id_pengembalian" readonly>
                             </div>
                             
                             <div class="">

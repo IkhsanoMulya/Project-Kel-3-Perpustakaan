@@ -87,17 +87,24 @@ switch ($page){
 
 <div class="container">
             <?php
-                include 'koneksi.php';
-                $sql = mysqli_query($db,"SELECT MAX(id_buku) FROM buku");
-                $id = json_encode($sql);
-                if ($id) {
-                    $format = "B%012d";
-                    $pisah = substr($id, 1, 4);
-                    $tambah = intval($id) + 1;
-                    $newId = sprintf($format,$tambah);
-                }else {
-                    $newId = 'B000000000001';
-                }
+                function getBookId() {
+                    include 'koneksi.php';
+                    $sql = "SELECT MAX(id_buku) as id from buku";
+            
+                    if ($result = mysqli_query($db, $sql)) {
+                        
+                        $id = mysqli_fetch_assoc($result);
+                        $max_id = $id['id'];
+                        $rowcount = intval(substr($max_id,1,12));
+                    }
+                    $newNumber = ($rowcount) + 1;
+            
+                    $paddedNumber = str_pad($newNumber, 12, '0', STR_PAD_LEFT);
+                    
+                    $transactionNumber = "B" . $paddedNumber;
+                    
+                    return $transactionNumber;
+                    }
             ?>
     <h3>Form Input Buku</h3>
     <div class="row">
@@ -107,7 +114,7 @@ switch ($page){
 
                     <div class="">
                         <label class="form-label" for="id"> ID Buku </label>
-                        <input type="text" id="id" name="id_buku" class="form-control" value="<?= $newId ?>" readonly>
+                        <input type="text" id="id" name="id_buku" class="form-control" value="<?= getBookId() ?>" readonly>
                     </div>
                     
                     <div class="">

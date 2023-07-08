@@ -124,6 +124,8 @@ if (!isset($_SESSION['user']) && !isset($_SESSION['id_login'])) {
           if ($p=='peminjaman') include'peminjaman.php';
           if ($p=='pengembalian') include'pengembalian.php';
           if ($p=='absensi') include'absensi.php';
+          if ($p=='detail') include'detail_peminjaman.php';
+          if ($p=='kembali') include'detail_pengembalian.php';
           
           if ($p=='petugas') include'petugas.php';
           if ($p=='prodi') include'prodi.php';

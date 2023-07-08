@@ -72,22 +72,31 @@
 <div class="container mt-3 ">
         <div class="col-md-4">
             <?php
-                include 'koneksi.php';
-                $sql = mysqli_query($db,"SELECT MAX(id_petugas) FROM petugas");
-                $id = json_encode($sql);
-                if ($id) {
-                    $format = "P%04d";
-                    $pisah = substr($id, 1, 4);
-                    $tambah = intval($id) + 1;
-                    $newId = sprintf($format,$tambah);
-                }
+                function getPetId() {
+                    include 'koneksi.php';
+                    $sql = "SELECT MAX(id_petugas) as id from petugas";
+            
+                    if ($result = mysqli_query($db, $sql)) {
+                        
+                        $id = mysqli_fetch_assoc($result);
+                        $max_id = $id['id'];
+                        $rowcount = intval(substr($max_id,1,4));
+                    }
+                    $newNumber = ($rowcount) + 1;
+            
+                    $paddedNumber = str_pad($newNumber, 4, '0', STR_PAD_LEFT);
+                    
+                    $transactionNumber = "P" . $paddedNumber;
+                    
+                    return $transactionNumber;
+                    }
             ?>
             <h2>Form Input Petugas</h2>
             <div class="row">
                 <form action="proses_petugas.php?aksi=input_user" method="post">
                    
                     
-                        <input type="text" class="form-control" value="<?= $newId ?>" name="id_petugas" hidden>
+                        <input type="text" class="form-control" value="<?= getPetId() ?>" name="id_petugas" hidden>
                    
                     <div class="d-flex gap-3">
 

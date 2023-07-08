@@ -72,19 +72,25 @@ switch ($page){
     <div class="container mt-3 ">
         <div class="col-md-9">
         <?php
-                include 'koneksi.php';
-                $ymd = date('Ymd');
-                $sql = mysqli_query($db,"SELECT MAX(id_peminjaman) FROM peminjaman WHERE tanggal_peminjaman = '$ymd'");
-                $id = json_encode($sql);
-                if ($id) {
-                    $format = '%03d';
-                    $pisah = substr($id, 9, 3);
-                    $tambah = intval($id) + 1;
-                    $last = sprintf($format,$tambah);
-                    $newId = 'J'.$ymd.$last;
-                }else {
-                    $newId = 'J'.$ymd.'001';
-                }
+                function getPemId() {
+                    include 'koneksi.php';
+                    $ymd = date('Ymd');
+                    $sql = "SELECT MAX(id_peminjaman) as id from peminjaman";
+            
+                    if ($result = mysqli_query($db, $sql)) {
+                        
+                        $id = mysqli_fetch_assoc($result);
+                        $max_id = $id['id'];
+                        $rowcount = intval(substr($max_id,10,3));
+                    }
+                    $newNumber = ($rowcount) + 1;
+            
+                    $paddedNumber = str_pad($newNumber, 3, '0', STR_PAD_LEFT);
+                    
+                    $transactionNumber = "J" .$ymd. $paddedNumber;
+                    
+                    return $transactionNumber;
+                    }
             ?>
             <h2>Form Input Peminjaman</h2>
             <div class="row">
@@ -93,7 +99,7 @@ switch ($page){
 
                        <div class="">
                            <label class="form-label">ID Peminjaman</label>
-                        <input type="text" class="form-control" value="<?= $newId ?>" name="id_peminjaman" readonly>
+                        <input type="text" class="form-control" value="<?= getPemId() ?>" name="id_peminjaman" readonly>
                     </div>
                     
                     <div class="">
@@ -129,6 +135,21 @@ switch ($page){
                     </div>
                     
                 </div>
+               
+                    <select class="form-select mt-3" name="buku[]">
+                        <option>Pilih Buku Yang Akan Dipinjam</option>
+                        <?php
+                        include 'koneksi.php';
+                        $ambil = mysqli_query($db,"SELECT * FROM buku");
+                        foreach ($ambil as $row) {
+                            $option = $row['judul']." | ".$row['pengarang']." | ".$row['penerbit']." | ".$row['tahun_terbit'];
+                        ?>    
+                            <option value="<?=$row['id_buku']?>"><?=$option?></option>
+
+                        <?php
+                        }
+                        ?>
+                </select>
                 
                 <table class="table table-bordered mt-2">
                 <tr class="table-secondary">
@@ -137,23 +158,20 @@ switch ($page){
                     <th>Pengarang</th>
                     <th>Penerbit</th>
                     <th>Tahun Terbit</th>
-                    <th>Rak</th>
+                  
                 
                 </tr>
                 <?php
-                    include 'koneksi.php';
-                    $ambil = mysqli_query($db,"SELECT * FROM buku join rak on(buku.id_rak = rak.id_rak) ORDER BY nama_rak");
+                    $tabel = mysqli_query($db,"SELECT * FROM detail_peminjaman");
                     $no = 1;
-                    while($data = mysqli_fetch_array($ambil)){
+                    while($data = mysqli_fetch_array($tabel)){
                 ?>
                     <tr>
                         <td> <?php echo $no ?> </td>
                         <td> <?php echo $data['judul'] ?> </td>
                         <td> <?php echo $data['pengarang'] ?> </td>
                         <td> <?php echo $data['penerbit'] ?> </td>
-                        <td> <?php echo $data['tahun_terbit'] ?> </td>
-                        <td> <?php echo $data['nama_rak'] ?> </td>
-                        
+                        <td> <?php echo $data['tahun_terbit'] ?> </td>                        
                     </tr>
                 <?php
                     $no++;
@@ -161,7 +179,7 @@ switch ($page){
                 ?>
             </table>
                 <input type="submit" class="btn btn-primary" name="submit" value="Submit">
-                </form>
+            </form>
             </div>
         </div>
     </div>

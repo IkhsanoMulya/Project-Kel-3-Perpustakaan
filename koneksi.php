@@ -79,7 +79,9 @@
         id_peminjaman CHAR(12) NOT NULL,
         tanggal_pengembalian DATE NOT NULL,
         denda INT NOT NULL,
-        FOREIGN KEY (id_peminjaman) REFERENCES peminjaman(id_peminjaman)
+        id_petugas CHAR(5) NOT NULL,
+        FOREIGN KEY (id_petugas) REFERENCES petugas(id_petugas),
+        FOREIGN KEY (id_peminjaman) REFERENCES peminjaman(id_peminjaman)    
     );";
     mysqli_query($db, $create_pengembalian);
     
@@ -87,8 +89,6 @@
     $create_detail = "CREATE TABLE IF NOT EXISTS detail_peminjaman (
         id_peminjaman CHAR(12) NOT NULL,
         id_buku CHAR(13) NOT NULL,
-        FOREIGN KEY (id_peminjaman) REFERENCES peminjaman(id_peminjaman),
-        FOREIGN KEY (id_buku) REFERENCES buku(id_buku),
         PRIMARY KEY (id_peminjaman, id_buku)
     );";
     mysqli_query($db, $create_detail);
