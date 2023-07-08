@@ -68,6 +68,7 @@
         tanggal_peminjaman DATE NOT NULL,
         tanggal_pengembalian DATE NOT NULL,
         id_petugas CHAR(5) NOT NULL,
+        status BOOLEAN NOT NULL,
         FOREIGN KEY (id_petugas) REFERENCES petugas(id_petugas),
         FOREIGN KEY (id_anggota) REFERENCES anggota(id_anggota)
     );";

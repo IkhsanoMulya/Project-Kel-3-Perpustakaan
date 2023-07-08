@@ -9,8 +9,8 @@ if ($_GET['aksi'] == 'input_pem') {
         $tanggal_peminjaman = $_POST['tgl_pinjam'];
         $tanggal_pengembalian = $_POST['tgl_kembali'];
 
-        $sql = mysqli_query($db, "INSERT INTO peminjaman(id_peminjaman, id_anggota, id_petugas, tanggal_peminjaman, tanggal_pengembalian) 
-        VALUES ('$id', '$id_anggota', '$id_petugas', '$tanggal_peminjaman', '$tanggal_pengembalian')");
+        $sql = mysqli_query($db, "INSERT INTO peminjaman(id_peminjaman, id_anggota, id_petugas, tanggal_peminjaman, tanggal_pengembalian,status) 
+        VALUES ('$id', '$id_anggota', '$id_petugas', '$tanggal_peminjaman', '$tanggal_pengembalian',1)");
 
         if ($sql) {
             echo "<script> 

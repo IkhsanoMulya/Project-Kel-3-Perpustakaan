@@ -130,36 +130,6 @@ switch ($page){
                     
                 </div>
                 
-                <div class="col-md-7 mt-2">
-                    <script>
-                        function submitForm() {
-                            document.getElementById("searchForm").submit();
-                        }
-                    </script>
-                        <form action="" method="post" id="searchForm">
-                            <select class="form-select">
-                                <option><input type="text" class="form-control" name="search" onchange="submitForm()"></option>
-                                <?php
-                                    
-                                    if (isset($_POST['seacrh'])) {
-                                        $search = $_POST['search'];
-                                        $sql = mysqli_query($db,"SELECT * FROM buku WHERE judul like %$search% 
-                                        OR pengarang like %$search% OR penerbit like %$search% 
-                                        OR tahun_terbit like %$search%");
-
-                                        if ($sql) {
-                                            foreach($sql as $row){
-                                                $option = $row['judul']." | ".$row['pengarang']." | ".$row['penerbit']." | ".$row['tahun_terbit'];
-                                               echo "<option value=".$row['id_buku'].">".$option."</option>";
-                                            }
-                                        }
-                                    }
-                                ?>
-                                
-                            </select>
-                        </form>
-                </div>
-
                 <table class="table table-bordered mt-2">
                 <tr class="table-secondary">
                     <th>No</th>
