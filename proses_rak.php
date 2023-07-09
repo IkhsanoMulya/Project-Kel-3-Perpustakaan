@@ -56,7 +56,6 @@ elseif ($_GET['aksi'] == 'hapus_rak') {
     }else{
         echo "
             <script>
-                alert('Data Gagal Dihapus');
                 window.location = 'index.php?p=rak&msg=delno';
             </script>";
     }

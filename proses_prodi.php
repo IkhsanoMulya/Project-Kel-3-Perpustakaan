@@ -59,7 +59,6 @@
         } else if($bisa > 0){
             echo "
                 <script>
-                    alert('Masih Ada Anggota di Prodi Ini!');
                     window.location = 'index.php?p=prodi&msg=aktif';
                 </script>";
         }else{

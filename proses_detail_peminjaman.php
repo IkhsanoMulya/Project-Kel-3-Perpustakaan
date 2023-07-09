@@ -15,8 +15,8 @@ if ($_GET['aksi'] == 'input_detail') {
         $sudahIn = mysqli_num_rows($query);
 
         if ($sudahIn == 0) {
-            $sql = mysqli_query($db, "INSERT INTO detail_peminjaman(id_peminjaman,id_buku) 
-            VALUES ('$idPinjam','$idBuku')");
+            $sql = mysqli_query($db, "INSERT INTO detail_peminjaman(id_peminjaman,id_buku,hilang_rusak) 
+            VALUES ('$idPinjam','$idBuku',0)");
             echo "<script> 
              window.location = 'index.php?p=peminjaman&page=input';
              </script>";
@@ -47,10 +47,9 @@ if ($_GET['aksi'] == 'input_detail') {
             window.location = 'index.php?p=peminjaman&page=input';
         </script>";
     }else{
-        echo "
-            <script>
-                alert('Data Gagal Dihapus');
-                </script>";
+        echo "<script> 
+        window.location = 'index.php?p=peminjaman&page=input&msg=no';
+        </script>";
     }
   
 }

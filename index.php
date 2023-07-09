@@ -46,13 +46,13 @@ if (!isset($_SESSION['user']) && !isset($_SESSION['id_login'])) {
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link <?php if ((isset($_GET['p']) && $_GET['p'] === 'peminjaman') || isset($_GET['page']) && $_GET['page'] === 'list'){ echo 'active'; }else if((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'input'){ echo 'active disabled';}; ?> " href="index.php?p=peminjaman">
+        <a class="nav-link <?php if ((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'list'){ echo 'active'; }else if((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'input'){ echo 'active disabled';}; ?> " href="index.php?p=peminjaman&page=list">
           <span data-feather="arrow-down-circle"></span>
           Peminjaman
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link <?php if (isset($_GET['p']) && $_GET['p'] === 'pengembalian'){ echo 'active'; }else if((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'input'){ echo 'disabled';}; ?> " href="index.php?p=pengembalian">
+        <a class="nav-link <?php if (isset($_GET['p']) && $_GET['p'] === 'pengembalian' || $_GET['p'] === 'kembali'){ echo 'active'; }else if((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'input'){ echo 'disabled';}; ?> " href="index.php?p=pengembalian">
           <span data-feather="arrow-up-circle"></span>
           Pengembalian
         </a>

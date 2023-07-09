@@ -181,7 +181,7 @@
    
                    <div class="">
                        <label class="form-label" for="alamat"> Alamat </label>
-                       <textarea name="alamat" id="alamat" class="form-control" required><?= $data['id_anggota'] ?></textarea>
+                       <textarea name="alamat" id="alamat" class="form-control" required><?= $data['alamat'] ?></textarea>
                    </div>
    
                    <div class="">

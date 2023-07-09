@@ -52,7 +52,7 @@ if ($_GET['aksi'] == 'input_peng') {
            if (isset($_POST['bayar'])) {
                while ( $idBuku = mysqli_fetch_assoc($cekBuku)) {
                     if (in_array($idBuku['id_buku'], $HR)) {
-                        continue;
+                        mysqli_query($db,"UPDATE detail_peminjaman SET hilang_rusak = 1 WHERE id_buku = '$idBuku[id_buku]' AND id_peminjaman = '$idP'");
                     }else{
                         $harga = mysqli_query($db,"UPDATE buku SET stok = stok+1 WHERE id_buku = '$idBuku[id_buku]'");
                     }
@@ -88,9 +88,9 @@ elseif ($_GET['aksi'] == 'edit_pem') {
         tanggal_peminjaman='$tanggal_peminjaman', tanggal_pengembalian='$tanggal_pengembalian' WHERE id='$id'");
 
         if ($sql) {
-            echo "<script>window.location='index.php?p=peminjaman&msg=ok'</script>";
+            echo "<script>window.location='index.php?p=peminjaman&msg=yes'</script>";
         } else {
-            echo $db->error;
+            echo "<script>window.location='index.php?p=peminjaman&msg=no'</script>";
         }
     }
 }
@@ -102,11 +102,12 @@ elseif ($_GET['aksi'] == 'hapus_pem') {
 
     if ($hapus) {
         echo "<script>
-            alert('Data Berhasil Dihapus !');
-            document.location.href = 'index.php?p=peminjaman';
+            document.location.href = 'index.php?p=peminjaman&msg=del';
             </script>";
     } else {
-        echo 'Gagal menghapus data';
+        echo "<script>
+        document.location.href = 'index.php?p=peminjaman&msg=delno';
+        </script>";
     }
 }
 

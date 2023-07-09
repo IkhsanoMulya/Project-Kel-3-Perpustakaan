@@ -90,15 +90,14 @@
     }
 
     elseif($_GET['aksi'] == 'hapus_user'){
-
+        $id = $_GET['id_hapus'];
         $child = mysqli_query($db,"SELECT id_petugas FROM peminjaman WHERE id_petugas ='$id'");
         $bisa = mysqli_num_rows($child);
         
         if ($bisa == 0 ) {
             $hapus = mysqli_query($db, "DELETE FROM petugas WHERE id_petugas='$id'");
             echo "<script>
-                alert('Data Berhasil Dihapus !');
-                window.location = 'index.php?p=petugas';
+                window.location = 'index.php?p=petugas&msg=del';
                 </script>";
         } else if($bisa > 0){
             $child = mysqli_query($db,"UPDATE peminjaman SET id_petugas = 'P0000' WHERE id_petugas ='$id'");

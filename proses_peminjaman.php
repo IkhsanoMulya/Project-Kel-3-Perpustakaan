@@ -56,9 +56,9 @@ elseif ($_GET['aksi'] == 'edit_pem') {
         tanggal_peminjaman='$tanggal_peminjaman', tanggal_pengembalian='$tanggal_pengembalian' WHERE id='$id'");
 
         if ($sql) {
-            echo "<script>window.location='index.php?p=peminjaman&msg=ok'</script>";
+            echo "<script>window.location='index.php?p=peminjaman&msg=yes'</script>";
         } else {
-            echo $db->error;
+            echo "<script>window.location='index.php?p=peminjaman&msg=no'</script>";
         }
     }
 }
@@ -70,11 +70,12 @@ elseif ($_GET['aksi'] == 'hapus_pem') {
 
     if ($hapus) {
         echo "<script>
-            alert('Data Berhasil Dihapus !');
-            document.location.href = 'index.php?p=peminjaman';
+            window.location = 'index.php?p=peminjaman&msg=del';
             </script>";
     } else {
-        echo 'Gagal menghapus data';
+        echo "<script>
+        window.location = 'index.php?p=peminjaman&msg=delno';
+        </script>";
     }
 }
 

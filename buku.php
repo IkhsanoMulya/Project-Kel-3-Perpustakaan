@@ -222,7 +222,7 @@ switch ($page){
         <h3>Edit Data buku</h3>
         <div class="row">
             <div class="col-md-10">
-            <form action="proses_buku.php?aksi=input_buku" method="post">
+            <form action="proses_buku.php?aksi=edit_buku" method="post">
                 <div class="d-flex gap-3">
 
                     <div class="">

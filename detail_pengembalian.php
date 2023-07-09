@@ -17,6 +17,7 @@ switch ($page){
                     <th>Penerbit</th>
                     <th>Tahun Terbit</th>
                     <th>Rak</th>
+                    <th>KET</th>
                 </tr>
                 <?php
                     include 'koneksi.php';
@@ -37,6 +38,7 @@ switch ($page){
                         <td> <?php echo $data['penerbit'] ?> </td>
                         <td> <?php echo $data['tahun_terbit'] ?> </td>
                         <td> <?php echo $data['nama_rak'] ?> </td>
+                        <td> <?php echo $data['hilang_rusak'] == 1 ? 'Hilang/Rusak' : '-' ?> </td>
                     </tr>
                 <?php
                     $no++;
