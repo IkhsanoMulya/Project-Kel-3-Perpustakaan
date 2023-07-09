@@ -40,7 +40,7 @@ elseif ($_GET['aksi'] == 'edit_buku') {
         $stok = $_POST['stok'];
 
         $sql = mysqli_query($db, "UPDATE buku SET judul='$judul', pengarang='$pengarang', penerbit='$penerbit', 
-        tahun_terbit='$tahun_terbit', id_rak='$rak' WHERE id_buku='$id'");
+        tahun_terbit='$tahun_terbit', id_rak='$rak', harga='$harga',stok='$stok' WHERE id_buku='$id'");
 
         if ($sql) {
             echo "<script>window.location='index.php?p=buku&msg=yes'</script>";

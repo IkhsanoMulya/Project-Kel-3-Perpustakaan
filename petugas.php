@@ -91,7 +91,7 @@
     ?>
 
 <div class="container mt-3 ">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <?php
                 function getPetId() {
                     include 'koneksi.php';
@@ -145,12 +145,10 @@
                         </div>
                     </div>
 
-                    <div class="">
+                    <div class="col-md-10">
                         <label class="form-label">No. Telepon</label>
                         <input type="text" class="form-control" pattern="[0-9]*" name="no_telepon" maxlength="15">
-                    </div>
-
-                    <div class="">
+                    
                             <label class="form-label">Alamat</label>
                             <textarea class="form-control"  name="alamat" ></textarea>
                     </div>          
@@ -169,7 +167,7 @@
         case 'edit':
     ?>
     <div class="container mt-3 ">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <?php
             include 'koneksi.php';
 
@@ -209,12 +207,10 @@
                         </div>
                     </div>
                     
-                    <div class="">
+                    <div class="col-md-10">
                         <label class="form-label">No. Telepon</label>
                         <input type="text" class="form-control" pattern="[0-9]*" value="<?= $data['no_telepon'] ?>" name="no_telepon">
-                    </div>
-
-                    <div class="">
+                    
                         <label class="form-label">Alamat</label>
                         <textarea class="form-control"  name="alamat"><?= $data['alamat'] ?></textarea>
                     </div>

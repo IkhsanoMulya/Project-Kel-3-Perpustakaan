@@ -15,7 +15,7 @@ if ($_GET['aksi'] == 'input_pem') {
             $absen = mysqli_query($db,"INSERT INTO absensi(id_anggota,tanggal,waktu) VALUES ('$id_anggota',DATE(NOW()),NOW());");
         }
 
-        $cekBuku = mysqli_query($db,"SELECT id_peminjaman FROM detail_peminjaman WHERE id_peminjaman = '$id'");
+        $cekBuku = mysqli_query($db,"SELECT id_buku FROM detail_peminjaman WHERE id_peminjaman = '$id'");
         $sudahBuku = mysqli_num_rows($cekBuku);
 
         if ($sudahBuku == 0) {
@@ -25,7 +25,9 @@ if ($_GET['aksi'] == 'input_pem') {
         }else {     
             $sql = mysqli_query($db, "INSERT INTO peminjaman(id_peminjaman, id_anggota, id_petugas, tanggal_peminjaman, tanggal_pengembalian,status) 
             VALUES ('$id', '$id_anggota', '$id_petugas', '$tanggal_peminjaman', '$tanggal_pengembalian',1)");
-    
+            while ($bukus = mysqli_fetch_array($cekBuku)) {
+                mysqli_query($db,"UPDATE buku SET stok = stok-1 WHERE id_buku = '$bukus[id_buku]'");
+            }
             if ($sql) {
                 echo "<script> 
                  window.location = 'index.php?p=peminjaman&msg=yes';

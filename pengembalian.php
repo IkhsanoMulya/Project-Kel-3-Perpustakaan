@@ -50,7 +50,7 @@ switch ($page){
                     INNER JOIN peminjaman ON peminjaman.id_peminjaman=pengembalian.id_peminjaman
                     INNER JOIN anggota ON anggota.id_anggota=peminjaman.id_anggota    
                     INNER JOIN petugas ON petugas.id_petugas=peminjaman.id_petugas    
-                    ORDER BY pengembalian.tanggal_pengembalian DESC");
+                    ORDER BY pengembalian.tanggal_pengembalian DESC, id_pengembalian ASC");
 
                     $no = 1;
                     while ($data = mysqli_fetch_array($ambil)) {
@@ -116,8 +116,9 @@ switch ($page){
                             
                             <div class="">
                                 <label class="form-label">ID Peminjaman</label>
-                                <input type="text" class="form-control"  name="id_peminjaman" value="<?= $_GET['id_peminjaman']?>">
+                                <input type="text" class="form-control" readonly name="id_peminjaman" value="<?= $_GET['id_peminjaman']?>">
                             </div>
+                            <input type="text" class="form-control" hidden name="id_petugas" value="<?= $_SESSION["id_login"]?>">
                             
                             <div class="">
                                 <label class="form-label">Tanggal Kembali</label>
@@ -128,36 +129,36 @@ switch ($page){
                                   
                         </div>
                         <table class="table table-bordered mt-3">
-                <tr class="table-secondary">
-                    <th>No</th>
-                    <th>Judul</th>
-                    <th>Pengarang</th>
-                    <th>Penerbit</th>
-                    <th>Tahun Terbit</th>
-                    <th>Hilang/Rusak</th>
-                </tr>
-                <?php
-                    include 'koneksi.php';
-                    $ambil = mysqli_query($db,"SELECT d.id_buku,judul,pengarang,penerbit,tahun_terbit FROM detail_peminjaman d
-                    join buku b on(d.id_buku = b.id_buku)
-                    join rak on (rak.id_rak = b.id_rak)
-                    WHERE id_peminjaman = '$_GET[id_peminjaman]'");
-                    $no = 1;
-                    while($data = mysqli_fetch_array($ambil)){
-                ?>
-                    <tr>
-                        <td> <?php echo $no ?> </td>
-                        <td> <?php echo $data['judul'] ?> </td>
-                        <td> <?php echo $data['pengarang'] ?> </td>
-                        <td> <?php echo $data['penerbit'] ?> </td>
-                        <td> <?php echo $data['tahun_terbit'] ?> </td>
-                        <td> <input type="checkbox" class="form-check-input" name="bayar[]" value="<?=$data['id_buku']?>"> </td>
-                    </tr>
-                <?php
-                    $no++;
-                    }
-                ?>
-            </table>
+                            <tr class="table-secondary">
+                                <th>No</th>
+                                <th>Judul</th>
+                                <th>Pengarang</th>
+                                <th>Penerbit</th>
+                                <th>Tahun Terbit</th>
+                                <th>Hilang/Rusak</th>
+                            </tr>
+                            <?php
+                                include 'koneksi.php';
+                                $ambil = mysqli_query($db,"SELECT d.id_buku,judul,pengarang,penerbit,tahun_terbit FROM detail_peminjaman d
+                                join buku b on(d.id_buku = b.id_buku)
+                                join rak on (rak.id_rak = b.id_rak)
+                                WHERE id_peminjaman = '$_GET[id_peminjaman]'");
+                                $no = 1;
+                                while($data = mysqli_fetch_array($ambil)){
+                            ?>
+                                <tr>
+                                    <td> <?php echo $no ?> </td>
+                                    <td> <?php echo $data['judul'] ?> </td>
+                                    <td> <?php echo $data['pengarang'] ?> </td>
+                                    <td> <?php echo $data['penerbit'] ?> </td>
+                                    <td> <?php echo $data['tahun_terbit'] ?> </td>
+                                    <td> <input type="checkbox" class="form-check-input" name="bayar[]" value="<?=$data['id_buku']?>"> </td>
+                                </tr>
+                            <?php
+                                $no++;
+                                }
+                            ?>
+                        </table>
                         </form>
                     </div>
                 </div>

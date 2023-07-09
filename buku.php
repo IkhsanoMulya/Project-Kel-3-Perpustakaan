@@ -136,7 +136,7 @@ switch ($page){
             ?>
     <h3>Form Input Buku</h3>
     <div class="row">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <form action="proses_buku.php?aksi=input_buku" method="post">
                 <div class="d-flex gap-3">
 
@@ -221,58 +221,76 @@ switch ($page){
         ?>
         <h3>Edit Data buku</h3>
         <div class="row">
-            <div class="col-md-4">
-            <form action="proses_buku.php?aksi=edit_buku" method="post">
+            <div class="col-md-10">
+            <form action="proses_buku.php?aksi=input_buku" method="post">
+                <div class="d-flex gap-3">
 
-            <div class="">
-                    <label class="form-label"> ID Buku </label>
-                    <input type="text"name="id_buku" class="form-control" value="<?= $data['id_buku'] ?>" readonly>
-                </div>
-                <div class="">
-                    <label class="form-label"> Judul </label>
-                    <input type="text"name="judul" class="form-control" value="<?= $data['judul'] ?>">
-                </div>
-                <div class="">
-                    <label class="form-label"> Pengarang </label>
-                    <input type="text"name="pengarang" class="form-control" value="<?= $data['pengarang'] ?>">
-                </div>
-                <div class="">
-                    <label class="form-label"> Penerbit </label>
-                    <input type="text"name="penerbit" class="form-control" value="<?= $data['penerbit'] ?>">
-                </div>
-
-                <div class="">
-                    <label class="form-label"> Tahun Terbit </label>
-                    <input type="number"name="tahun_terbit" class="form-control" value="<?= $data['tahun_terbit'] ?>">
-                </div>
-                <div class="">
-                    <label class="form-label" for="rak">Rak</label>
-                    <select name="rak" id="rak" class="form-select">
-                <?php
+                    <div class="">
+                        <label class="form-label" for="id"> ID Buku </label>
+                        <input type="text" id="id" name="id_buku" class="form-control" value="<?= $data['id_buku'] ?>" readonly>
+                    </div>
                     
-                    $raks = mysqli_query($db,'SELECT * FROM rak');
-                    foreach ($raks as $rak) {
-                ?>
-                    <option value="<?= $rak['id_rak'] ?>" <?php $rak['id_rak'] == $data['id_rak'] ? 'selected' : '' ?> ><?=$rak['nama_rak']?></option>
-                <?php
-                    }
-                ?>
-                    </select>
+                    <div class="">
+                        <label class="form-label" for="tahun"> Tahun Terbit </label>
+                        <input type="text" name="tahun_terbit" id="tahun" class="form-control" value="<?= $data['tahun_terbit'] ?>" maxlength="4" required>
+                    </div>
                 </div>
-                <div class="">
-                        <label class="form-label">Harga</label>
-                        <input type="number" class="form-control" name="harga" value="<?= $data['harga'] ?>">
+
+                <div class="d-flex gap-3 mt-2">
+                    
+                    <div class="">
+                        <label class="form-label" for="judul"> Judul </label>
+                        <input type="text" name="judul" id="judul" class="form-control" value="<?= $data['judul'] ?>" required>
+                    </div>
+                    
+                    <div class="">
+                        <label class="form-label" for="rak">Rak</label>
+                        <select name="rak" id="rak" class="form-select" required>
+                        <option value=""  >Pilih Rak</option>
+                        <?php
+                            $raks = mysqli_query($db,'SELECT * FROM rak');
+                            foreach ($raks as $rak) {
+                        ?>
+                            <option value="<?= $rak['id_rak'] ?>" <?php $rak['id_rak'] == $data['id_rak'] ? 'selected' : '' ?>><?=$rak['nama_rak']?></option>
+                            <?php
+                            }
+                            ?>
+                        </select>
+                    </div>
+
                 </div>
-                <div class="">
-                        <label class="form-label">Stok</label>
-                        <input type="number" class="form-control" name="stok" value="<?= $data['stok'] ?>">
+
+                <div class="d-flex mt-2 gap-3">
+
+                    <div class="">
+                        <label class="form-label" for="pengarang"> Pengarang </label>
+                        <input type="text" name="pengarang" id="pengarang" class="form-control" value="<?= $data['pengarang'] ?>" required>
+                    </div>
+                    
+                    <div class="">
+                        <label class="form-label" for="harga">Harga</label>
+                        <input type="number" class="form-control" id="harga" name="harga" value="<?= $data['harga'] ?>" required>
+                    </div>
                 </div>
-            
-            <div class="mt-2">
-                <input type="submit" class="btn btn-primary" name="submit" value="Submit">
-                <input type="Reset" class="btn btn-secondary" name="reset" value="Reset">
-            </div>
-             </form>
+                    
+                <div class="d-flex mt-2 gap-3">
+
+                    <div class="">
+                        <label class="form-label" for="penerbit"> Penerbit </label>
+                        <input type="text" name="penerbit" id="penerbit" class="form-control" value="<?= $data['penerbit'] ?>" required>
+                    </div>
+                    
+                    <div class="">
+                        <label class="form-label" for="stok">Stok</label>
+                        <input type="number" class="form-control" id="stok" value="<?= $data['stok'] ?>" name="stok" required>
+                    </div>
+                </div>
+                    
+                <div class="mt-2">
+                    <input type="submit" name="submit" class="btn btn-primary">
+                    <input type="reset" name="reset" class="btn btn-secondary">
+                </div>
+            </form>
              
         </div>     
        </div>     
