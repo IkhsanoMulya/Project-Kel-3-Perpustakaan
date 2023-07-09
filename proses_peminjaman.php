@@ -8,7 +8,11 @@ if ($_GET['aksi'] == 'input_pem') {
         $id_petugas = $_POST['id_petugas'];
         $tanggal_peminjaman = $_POST['tgl_pinjam'];
         $tanggal_pengembalian = $_POST['tgl_kembali'];
-
+        $query = mysqli_query($db,"SELECT id_anggota FROM absensi WHERE id_anggota = '$id_anggota'");
+        $sudahAbsen = mysqli_num_rows($query);
+        if ($sudahAbsen == 0) {
+            $absen = mysqli_query($db,"INSERT INTO absensi(id_anggota,tanggal,waktu) VALUES ('$id_anggota',DATE(NOW()),NOW());");
+        }
         $sql = mysqli_query($db, "INSERT INTO peminjaman(id_peminjaman, id_anggota, id_petugas, tanggal_peminjaman, tanggal_pengembalian,status) 
         VALUES ('$id', '$id_anggota', '$id_petugas', '$tanggal_peminjaman', '$tanggal_pengembalian',1)");
 

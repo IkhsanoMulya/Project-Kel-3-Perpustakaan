@@ -55,7 +55,7 @@
                 
                 <td>
                     <a href="index.php?p=petugas&page=edit&id_edit=<?=$row["id_petugas"]; ?>" class="btn btn-warning"><span data-feather="edit"></a>
-                    <a href="proses_petugas.php?p=hapus_user&id_hapus=<?= $row["id_petugas"]; ?>"
+                    <a href="proses_petugas.php?aksi=hapus_user&id_hapus=<?= $row["id_petugas"]; ?>"
                         onclick="return confirm('Yakin hapus data ?');" class="btn btn-danger"><span data-feather="trash-2" ></span> </a>
                 </td>
             </tr>

@@ -22,6 +22,7 @@ switch ($page){
                     include 'koneksi.php';
                     $ambil = mysqli_query($db,"SELECT * FROM detail_peminjaman d
                     join buku b on(d.id_buku = b.id_buku)
+                    join rak on (rak.id_rak = b.id_rak)
                     WHERE id_peminjaman = '$_GET[id_peminjaman]'");
                     $no = 1;
                     while($data = mysqli_fetch_array($ambil)){

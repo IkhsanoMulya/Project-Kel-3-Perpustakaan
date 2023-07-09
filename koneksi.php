@@ -1,5 +1,7 @@
 
 <?php
+    
+   
     $server = "localhost";
     $user = "root";
     $password = "";
@@ -89,7 +91,9 @@
     $create_detail = "CREATE TABLE IF NOT EXISTS detail_peminjaman (
         id_peminjaman CHAR(12) NOT NULL,
         id_buku CHAR(13) NOT NULL,
-        PRIMARY KEY (id_peminjaman, id_buku)
+        PRIMARY KEY (id_peminjaman, id_buku),
+        FOREIGN KEY (id_buku) REFERENCES buku(id_buku)    
+
     );";
     mysqli_query($db, $create_detail);
     

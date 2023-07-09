@@ -38,6 +38,7 @@ switch ($page){
                     $ambil = mysqli_query($db, "SELECT * FROM peminjaman INNER JOIN 
                         petugas ON petugas.id_petugas=peminjaman.id_petugas
                         INNER JOIN anggota ON anggota.id_anggota=peminjaman.id_anggota
+                        WHERE status = 1
                         ORDER BY tanggal_peminjaman DESC");
 
                     $no = 1;
@@ -70,7 +71,7 @@ switch ($page){
      case 'input':           
 ?>
     <div class="container mt-3 ">
-        <div class="col-md-9">
+        <div class="col-md-10">
         <?php
                 function getPemId() {
                     include 'koneksi.php';
@@ -109,7 +110,7 @@ switch ($page){
 
                     <div class="">
                         <label class="form-label">ID Anggota</label>
-                        <input type="text" class="form-control"  name="id_anggota" required>
+                        <input type="text" class="form-control" value="" name="id_anggota" required>
                     </div>
                     
                     <div class="">
@@ -134,51 +135,73 @@ switch ($page){
                         <input class="form-control" type="date" name="tgl_kembali" value="<?= $desiredDate?>" readonly>
                     </div>
                     
+                    <input type="submit" class="btn btn-primary" name="submit" value="Selesai">
                 </div>
-               
-                    <select class="form-select mt-3" name="buku[]">
-                        <option>Pilih Buku Yang Akan Dipinjam</option>
-                        <?php
-                        include 'koneksi.php';
-                        $ambil = mysqli_query($db,"SELECT * FROM buku");
-                        foreach ($ambil as $row) {
-                            $option = $row['judul']." | ".$row['pengarang']." | ".$row['penerbit']." | ".$row['tahun_terbit'];
-                        ?>    
-                            <option value="<?=$row['id_buku']?>"><?=$option?></option>
+                   
+            </form>
 
-                        <?php
+
+            <form method="post" action="proses_detail_peminjaman.php?aksi=input_detail" id="myForm" class="mt-3">
+                    <input type="text" name="pinjam" id="" value="<?= getPemId() ?>" hidden>
+                    <div class="d-flex gap-3">
+                    <select class="form-select mt-3 mb-2" name="buku">
+                            <option value="">Pilih Buku Yang Akan Dipinjam</option>
+                            <?php
+                            include 'koneksi.php';
+                            $ambil = mysqli_query($db,"SELECT * FROM buku WHERE stok > 0");
+                            foreach ($ambil as $row) {
+                                $option = $row['judul']." | ".$row['pengarang']." | ".$row['penerbit']." | ".$row['tahun_terbit'];
+                            ?>    
+                                <option value="<?=$row['id_buku']?>"><?=$option?></option>
+                            <?php
+                            }
+                            ?>
+                    </select>
+                    <input type="submit" class="btn btn-success" name="submit"  value="Tambah Buku">
+                    <input type="submit" class="btn text-danger" name="batal"  value="Batalkan Semua">
+                    </div>
+                    <?php
+                        $pesan=isset($_GET['msg']) ? $_GET['msg'] : '';
+                        if ($pesan =='no'){
+                    ?>
+                    <div class="alert alert-warning alert-dismissible fade show mt-1" role="alert">
+                        <strong>Tidak dapat Memilih Buku yang sudah Diinput!</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php
                         }
-                        ?>
-                </select>
-                
-                <table class="table table-bordered mt-2">
-                <tr class="table-secondary">
-                    <th>No</th>
-                    <th>Judul</th>
-                    <th>Pengarang</th>
-                    <th>Penerbit</th>
-                    <th>Tahun Terbit</th>
-                  
-                
-                </tr>
-                <?php
-                    $tabel = mysqli_query($db,"SELECT * FROM detail_peminjaman");
-                    $no = 1;
-                    while($data = mysqli_fetch_array($tabel)){
-                ?>
-                    <tr>
-                        <td> <?php echo $no ?> </td>
-                        <td> <?php echo $data['judul'] ?> </td>
-                        <td> <?php echo $data['pengarang'] ?> </td>
-                        <td> <?php echo $data['penerbit'] ?> </td>
-                        <td> <?php echo $data['tahun_terbit'] ?> </td>                        
+                    ?>
+                    <table class="table table-bordered mt-2">
+                    <tr class="table-secondary">
+                        <th>No</th>
+                        <th>Judul</th>
+                        <th>Pengarang</th>
+                        <th>Penerbit</th>
+                        <th>Tahun Terbit</th>
+                        <th>Aksi</th>
+                    
                     </tr>
-                <?php
-                    $no++;
-                    }
-                ?>
-            </table>
-                <input type="submit" class="btn btn-primary" name="submit" value="Submit">
+                    <?php
+                        $idPin = getPemId();
+                        $tabel = mysqli_query($db,"SELECT d.id_buku,judul,pengarang,penerbit,tahun_terbit FROM detail_peminjaman d JOIN buku b 
+                        ON d.id_buku = b.id_buku WHERE id_peminjaman = '$idPin'");
+                        $no = 1;
+                        while($data = mysqli_fetch_array($tabel)){
+                    ?>
+                        <tr>
+                            <td> <?php echo $no ?> </td>
+                            <td> <?php echo $data['judul'] ?> </td>
+                            <td> <?php echo $data['pengarang'] ?> </td>
+                            <td> <?php echo $data['penerbit'] ?> </td>
+                            <td> <?php echo $data['tahun_terbit'] ?> </td>                        
+                            <td> <a href="proses_detail_peminjaman.php?aksi=hapus_detail&id_hapus=<?= $row["id_buku"]; ?>&id_p=<?= getPemId() ?>"
+                        onclick="return confirm('Yakin hapus data ?');" class="btn btn-danger"><span data-feather="trash-2" ></span> </a> </td>                        
+                        </tr>
+                    <?php
+                        $no++;
+                        }
+                    ?>
+                </table>
             </form>
             </div>
         </div>

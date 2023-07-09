@@ -105,7 +105,6 @@
             $hapus = mysqli_query($db, "DELETE FROM petugas WHERE id_petugas='$id'");
             echo "
                 <script>
-                    alert('Anggota Masih Memiliki Peminjaman Aktif!');
                     window.location = 'index.php?p=petugas';
                 </script>";
         }else{

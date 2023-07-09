@@ -40,37 +40,37 @@ if (!isset($_SESSION['user']) && !isset($_SESSION['id_login'])) {
   <div class="position-sticky pt-3 sidebar-sticky text-bg-dark position-sticky pt-3 sidebar-sticky text-bg-dark d-flex justify-content-center">
     <ul class="nav flex-column mt-2 ">
       <li class="nav-item">
-        <a class="nav-link <?php echo (isset($_GET['p']) && $_GET['p'] === 'home' ? 'active' : ''); ?>" aria-current="page" href="index.php?p=home">
+        <a class="nav-link <?php if (isset($_GET['p']) && $_GET['p'] === 'home'){ echo 'active'; }else if((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'input'){ echo 'disabled';}; ?> " aria-current="page" href="index.php?p=home">
           <span data-feather="home"></span>
           Home
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link <?php echo  (isset($_GET['p']) && $_GET['p'] == 'peminjaman' ? 'active' : ''); ?>" href="index.php?p=peminjaman">
+        <a class="nav-link <?php if ((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'list'){ echo 'active'; }else if((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'input'){ echo 'active disabled';}; ?> " href="index.php?p=peminjaman">
           <span data-feather="arrow-down-circle"></span>
           Peminjaman
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link <?php echo  (isset($_GET['p']) && $_GET['p'] == 'pengembalian' ? 'active' : ''); ?>" href="index.php?p=pengembalian">
+        <a class="nav-link <?php if (isset($_GET['p']) && $_GET['p'] === 'pengembalian'){ echo 'active'; }else if((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'input'){ echo 'disabled';}; ?> " href="index.php?p=pengembalian">
           <span data-feather="arrow-up-circle"></span>
           Pengembalian
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link <?php echo  (isset($_GET['p']) && $_GET['p'] == 'buku' ? 'active' : ''); ?>" href="index.php?p=buku">
+        <a class="nav-link <?php if (isset($_GET['p']) && $_GET['p'] === 'buku'){ echo 'active'; }else if((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'input'){ echo 'disabled';}; ?> " href="index.php?p=buku">
           <span data-feather="book"></span>
           Buku
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link <?php echo  (isset($_GET['p']) && $_GET['p'] == 'anggota' ? 'active' : ''); ?>" href="index.php?p=anggota">
+        <a class="nav-link <?php if (isset($_GET['p']) && $_GET['p'] === 'anggota'){ echo 'active'; }else if((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'input'){ echo 'disabled';}; ?> " href="index.php?p=anggota">
           <span data-feather="users"></span>
           Anggota
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link <?php echo  (isset($_GET['p']) && $_GET['p'] == 'absensi' ? 'active' : ''); ?>" href="index.php?p=absensi">
+        <a class="nav-link <?php if (isset($_GET['p']) && $_GET['p'] === 'absensi'){ echo 'active'; }else if((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'input'){ echo 'disabled';}; ?> " href="index.php?p=absensi">
           <span data-feather="bookmark"></span>
           Absensi
         </a>
@@ -80,19 +80,19 @@ if (!isset($_SESSION['user']) && !isset($_SESSION['id_login'])) {
   
       ?>
       <li class="nav-item">
-        <a class="nav-link <?php echo  (isset($_GET['p']) && $_GET['p'] == 'prodi' ? 'active' : ''); ?>" href="index.php?p=prodi">
+        <a class="nav-link <?php if (isset($_GET['p']) && $_GET['p'] === 'prodi'){ echo 'active'; }else if((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'input'){ echo 'disabled';}; ?> " href="index.php?p=prodi">
           <span data-feather="hexagon"></span>
           Prodi
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link <?php echo  (isset($_GET['p']) && $_GET['p'] == 'petugas' ? 'active' : ''); ?>" href="index.php?p=petugas">
+        <a class="nav-link <?php if (isset($_GET['p']) && $_GET['p'] === 'petugas'){ echo 'active'; }else if((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'input'){ echo 'disabled';}; ?> " href="index.php?p=petugas">
           <span data-feather="user"></span>
           Petugas
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link <?php echo  (isset($_GET['p']) && $_GET['p'] == 'rak' ? 'active' : ''); ?>" href="index.php?p=rak">
+        <a class="nav-link <?php if (isset($_GET['p']) && $_GET['p'] === 'rak'){ echo 'active'; }else if((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'input'){ echo 'disabled';}; ?> " href="index.php?p=rak">
           <span data-feather="columns"></span>
           Rak
         </a>
@@ -103,7 +103,7 @@ if (!isset($_SESSION['user']) && !isset($_SESSION['id_login'])) {
       ?>
       
       <li class="fixed-bottom d-flex align-items-center ms-5 mb-3">
-        <a class="nav-link px-3 text-bg-dark <?php echo (isset($_GET['p']) && $_GET['p'] == 'logout' ? 'active' : ''); ?>" href="logout.php">
+        <a class="nav-link px-3 text-bg-dark <?php if (isset($_GET['p']) && $_GET['p'] === 'logout'){ echo 'active'; }else if((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'input'){ echo 'disabled';}; ?>" href="logout.php">
           <span data-feather="log-out"></span>
           Sign Out
         </a>
