@@ -9,10 +9,12 @@ if ($_GET['aksi'] == 'input_rak') {
 
         if ($sql) {
             echo "<script> 
-             window.location = 'index.php?p=rak&msg=ok';
+             window.location = 'index.php?p=rak&msg=yes';
              </script>";
         } else {
-            echo $db->error;
+            echo "<script> 
+             window.location = 'index.php?p=rak&msg=no';
+             </script>";
         }
     }
 }
@@ -26,9 +28,11 @@ elseif ($_GET['aksi'] == 'edit_rak') {
         $sql = mysqli_query($db, "UPDATE rak SET nama_rak='$nama' WHERE id_rak='$id'");
 
         if ($sql) {
-            echo "<script>window.location='index.php?p=rak&msg=ok'</script>";
+            echo "<script>window.location='index.php?p=rak&msg=yes'</script>";
         } else {
-            echo $db->error;
+            echo "<script> 
+            window.location = 'index.php?p=rak&msg=no';
+            </script>";
         }
     }
 }
@@ -42,20 +46,18 @@ elseif ($_GET['aksi'] == 'hapus_rak') {
     if ($bisa == 0 ) {
         $hapus = mysqli_query($db, "DELETE FROM rak WHERE id_rak='$id'");
         echo "<script>
-            alert('Data Berhasil Dihapus !');
-            window.location = 'index.php?p=rak';
+            window.location = 'index.php?p=rak&msg=del';
             </script>";
     } else if($bisa > 0){
         echo "
             <script>
-                alert('Masih Ada Buku di Rak Ini!');
-                window.location = 'index.php?p=rak';
+                window.location = 'index.php?p=rak&msg=aktif';
             </script>";
     }else{
         echo "
             <script>
                 alert('Data Gagal Dihapus');
-                window.location = 'index.php?p=rak';
+                window.location = 'index.php?p=rak&msg=delno';
             </script>";
     }
 }

@@ -12,12 +12,12 @@
             if ($sql) {
                 echo "
                 <script>
-                    window.location = 'index.php?p=prodi&msg=ok';
+                    window.location = 'index.php?p=prodi&msg=yes';
                 </script>";
             } else {
                 echo "
                 <script>
-                    alert('data gagal  disimpan !');
+                window.location = 'index.php?p=prodi&msg=no';
                 </script>";
             }
         }
@@ -35,12 +35,12 @@
         if ($sql) {
             echo "
             <script>
-                window.location = 'index.php?p=prodi';
+                window.location = 'index.php?p=prodi&msg=yes';
             </script>";
         } else {
             echo "
             <script>
-                alert('Data Gagal Diubah!');
+            window.location = 'index.php?p=prodi&msg=no';
             </script>";
             }
         }
@@ -54,20 +54,18 @@
         if ($bisa == 0 ) {
             $hapus = mysqli_query($db, "DELETE FROM prodi WHERE id_prodi='$id'");
             echo "<script>
-                alert('Data Berhasil Dihapus !');
-                window.location = 'index.php?p=prodi';
+                window.location = 'index.php?p=prodi&msg=del';
                 </script>";
         } else if($bisa > 0){
             echo "
                 <script>
                     alert('Masih Ada Anggota di Prodi Ini!');
-                    window.location = 'index.php?p=prodi';
+                    window.location = 'index.php?p=prodi&msg=aktif';
                 </script>";
         }else{
             echo "
                 <script>
-                    alert('Data Gagal Dihapus');
-                    window.location = 'index.php?p=prodi';
+                    window.location = 'index.php?p=prodi&msg=delno';
                 </script>";
         }
     }

@@ -15,16 +15,37 @@
     <div class="container">
         <div class="row mb-2">
         <?php
-            $pesan=isset($_GET['msg']) ? $_GET['msg'] : '';
-            if ($pesan =='ok'){
-        ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Data berhasil disimpan!</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <?php
-            }
-        ?>
+                $pesan=isset($_GET['msg']) ? $_GET['msg'] : '';
+                if ($pesan =='yes'){
+            ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data berhasil disimpan!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
+                }elseif ($pesan =='no') {
+            ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data Gagal disimpan!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
+                }elseif ($pesan =='del') {
+            ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data Berhasil dihapus!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
+                }elseif ($pesan =='delno') {
+            ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data Gagal dihapus!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
+                }
+            ?>
 
         <!--Menampilkan Data User dengan tabel-->
         <h2>Data Petugas</h2>

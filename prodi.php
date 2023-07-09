@@ -14,16 +14,45 @@
     <div class="container">
         <div class="row mb-2">
         <?php
-            $pesan=isset($_GET['msg']) ? $_GET['msg'] : '';
-            if ($pesan =='ok'){
-        ?>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>Data berhasil disimpan!</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-        <?php
-            }
-        ?>
+                $pesan=isset($_GET['msg']) ? $_GET['msg'] : '';
+                if ($pesan =='yes'){
+            ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data berhasil disimpan!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
+                }elseif ($pesan =='no') {
+            ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data Gagal disimpan!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
+                }elseif ($pesan =='del') {
+            ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data Berhasil dihapus!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
+                }elseif ($pesan =='delno') {
+            ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data Gagal dihapus!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
+                }elseif ($pesan =='aktif') {
+            ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Masih Ada Anggota di Prodi Ini!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
+                }
+            ?>
+
             <h2>Data Prodi</h2>
             <div class="col-md-4">
                 <a href="index.php?p=prodi&page=input" class="btn btn-success mb-3" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .90rem;">Tambah Prodi</a>

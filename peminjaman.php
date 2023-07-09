@@ -7,10 +7,17 @@ switch ($page){
             <div class="row mb-2">
             <?php
                 $pesan=isset($_GET['msg']) ? $_GET['msg'] : '';
-                if ($pesan =='ok'){
+                if ($pesan =='yes'){
             ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Data berhasil disimpan!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
+                }elseif ($pesan =='no') {
+            ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data Gagal disimpan!</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <?php
@@ -22,7 +29,7 @@ switch ($page){
             <a class="btn btn-success mb-3" href="index.php?p=peminjaman&page=input" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .90rem;">Tambah Peminjaman</a>
         
             </div>
-                <table class="table table-bordered">
+                <table class="table table-bordered ">
                     <tr class="table-secondary">
                         <th>No</th>
                         <th>ID Peminjaman</th>
@@ -54,7 +61,8 @@ switch ($page){
                             <td> <?php echo $data['tanggal_pengembalian'] ?> </td>
                             <td> <?php echo $data['nama_petugas'] ?> </td>
                             <td>
-                                <a href="index.php?p=detail&page=list&id_peminjaman=<?= $data['id_peminjaman'] ?>" class="btn btn-primary">Detail</a>
+                                <a href="index.php?p=detail&page=list&id_peminjaman=<?= $data['id_peminjaman'] ?>" class="btn btn-secondary">Detail</a>
+                                <a href="index.php?p=pengembalian&page=input&id_peminjaman=<?= $data['id_peminjaman'] ?>" class="btn btn-primary">Kembalikan</a>
                             </td>
                         </tr>
                         <?php

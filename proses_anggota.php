@@ -16,12 +16,12 @@ if ($_GET['aksi'] == 'input_ang') {
 
         if ($sql) {
             echo "<script> 
-             window.location = 'index.php?p=anggota&msg=ok';
+             window.location = 'index.php?p=anggota&msg=yes';
              </script>";
         } else {
             echo "
                 <script>
-                    alert('data gagal  disimpan !');
+                window.location = 'index.php?p=anggota&msg=no';
                 </script>";
         }
     }
@@ -41,11 +41,11 @@ elseif ($_GET['aksi'] == 'edit_ang') {
         no_telepon='$no_telepon', id_prodi='$id_prodi' WHERE id_anggota='$id'");
 
         if ($sql) {
-            echo "<script>window.location='index.php?p=anggota&msg=ok'</script>";
+            echo "<script>window.location='index.php?p=anggota&msg=yes'</script>";
         } else {
             echo "
                     <script>
-                        alert('data gagal  disimpan !');
+                    window.location = 'index.php?p=anggota&msg=no';
                     </script>";
         }
     }
@@ -60,20 +60,17 @@ elseif ($_GET['aksi'] == 'hapus_ang') {
     if ($bisa == 0 ) {
         $hapus = mysqli_query($db, "DELETE FROM anggota WHERE id_anggota='$id'");
         echo "<script>
-            alert('Data Berhasil Dihapus !');
-            window.location = 'index.php?p=anggota';
+            window.location = 'index.php?p=anggota&msg=del';
             </script>";
     } else if($bisa > 0){
         echo "
             <script>
-                alert('Anggota Masih Memiliki Peminjaman Aktif!');
-                window.location = 'index.php?p=anggota';
+                window.location = 'index.php?p=anggota&msg=aktif';
             </script>";
     }else{
         echo "
             <script>
-                alert('Data Gagal Dihapus');
-                window.location = 'index.php?p=anggota';
+                window.location = 'index.php?p=anggota&msg=delno';
             </script>";
     }
 }

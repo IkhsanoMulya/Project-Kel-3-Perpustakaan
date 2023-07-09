@@ -17,10 +17,12 @@ if ($_GET['aksi'] == 'input_buku') {
 
         if ($sql) {
             echo "<script> 
-             window.location = 'index.php?p=buku&msg=ok';
+             window.location = 'index.php?p=buku&msg=yes';
              </script>";
         } else {
-            echo $db->error;
+            echo "<script> 
+            window.location = 'index.php?p=buku&msg=no';
+            </script>";
         }
     }
 }
@@ -41,9 +43,11 @@ elseif ($_GET['aksi'] == 'edit_buku') {
         tahun_terbit='$tahun_terbit', id_rak='$rak' WHERE id_buku='$id'");
 
         if ($sql) {
-            echo "<script>window.location='index.php?p=buku&msg=ok'</script>";
+            echo "<script>window.location='index.php?p=buku&msg=yes'</script>";
         } else {
-            echo $db->error;
+            echo "<script> 
+            window.location = 'index.php?p=buku&msg=no';
+            </script>";
         }
     }
 }
@@ -57,20 +61,17 @@ elseif ($_GET['aksi'] == 'hapus_buku') {
     if ($bisa == 0 ) {
         $hapus = mysqli_query($db, "DELETE FROM buku WHERE id_buku='$id'");
         echo "<script>
-            alert('Data Berhasil Dihapus !');
-            window.location = 'index.php?p=buku';
+            window.location = 'index.php?p=buku&msg=del';
             </script>";
     } else if($bisa > 0){
         echo "
             <script>
-                alert('Buku Masih Dipinjam!');
-                window.location = 'index.php?p=buku';
+                window.location = 'index.php?p=buku&msg=aktif';
             </script>";
     }else{
         echo "
             <script>
-                alert('Data Gagal Dihapus');
-                window.location = 'index.php?p=buku';
+                window.location = 'index.php?p=buku&msg=delno';
             </script>";
     }
   

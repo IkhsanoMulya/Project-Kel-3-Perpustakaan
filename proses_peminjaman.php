@@ -18,10 +18,12 @@ if ($_GET['aksi'] == 'input_pem') {
 
         if ($sql) {
             echo "<script> 
-             window.location = 'index.php?p=peminjaman&msg=ok';
+             window.location = 'index.php?p=peminjaman&msg=yes';
              </script>";
         } else {
-            echo $db->error;
+            echo "<script> 
+             window.location = 'index.php?p=peminjaman&msg=no';
+             </script>";
         }
     }
 }

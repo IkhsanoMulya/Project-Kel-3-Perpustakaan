@@ -21,12 +21,12 @@
                 if ($sql) {
                     echo "
                     <script>
-                        window.location = 'index.php?p=petugas&msg=ok';
+                        window.location = 'index.php?p=petugas&msg=yes';
                     </script>";
                 } else {
                     echo "
                     <script>
-                        alert('data gagal  disimpan !');
+                    window.location = 'index.php?p=petugas&msg=no';
                     </script>";
                 }
                 
@@ -65,12 +65,12 @@
                 if ($sql) {
                     echo "
                     <script>
-                        window.location = 'index.php?p=petugas';
+                        window.location = 'index.php?p=petugas&msg=yes';
                     </script>";
                 } else {
                     echo "
                     <script>
-                        alert('Data Gagal Diubah!');
+                    window.location = 'index.php?p=petugas&msg=no';
                     </script>";
                     }
 
@@ -105,13 +105,13 @@
             $hapus = mysqli_query($db, "DELETE FROM petugas WHERE id_petugas='$id'");
             echo "
                 <script>
-                    window.location = 'index.php?p=petugas';
+                    window.location = 'index.php?p=petugas&msg=del';
                 </script>";
         }else{
             echo "
                 <script>
-                    alert('Data Gagal Dihapus');
-                    window.location = 'index.php?p=petugas';
+                    
+                    window.location = 'index.php?p=petugas&msg=delno';
                 </script>";
         }
         // $hapus = mysqli_query($db, "DELETE FROM petugas where id = '$_GET[id_hapus]'");

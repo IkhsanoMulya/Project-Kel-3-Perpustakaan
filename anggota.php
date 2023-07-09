@@ -12,12 +12,40 @@
 <body>
     <div class="container">
         <div class="row mb-2">
-            <?php
+        <?php
                 $pesan=isset($_GET['msg']) ? $_GET['msg'] : '';
-                if ($pesan =='ok'){
+                if ($pesan =='yes'){
             ?>
             <div class="alert alert-success alert-dismissible fade show" role="alert">
                 <strong>Data berhasil disimpan!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
+                }elseif ($pesan =='no') {
+            ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data Gagal disimpan!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
+                }elseif ($pesan =='del') {
+            ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data Berhasil dihapus!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
+                }elseif ($pesan =='delno') {
+            ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Data Gagal dihapus!</strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <?php
+                }elseif ($pesan =='aktif') {
+            ?>
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong>Anggota Masih Memiliki Peminjaman Aktif!</strong>
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
             <?php
