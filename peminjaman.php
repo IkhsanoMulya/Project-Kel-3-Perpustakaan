@@ -79,7 +79,7 @@ switch ($page){
      case 'input':           
 ?>
     <div class="container mt-3 ">
-        <div class="col-md-10">
+        <div class="col-md-12">
         <?php
                 function getPemId() {
                     include 'koneksi.php';
@@ -103,6 +103,17 @@ switch ($page){
             ?>
             <h2>Form Input Peminjaman</h2>
             <div class="row">
+                    <?php
+                        $pesan=isset($_GET['msg']) ? $_GET['msg'] : '';
+                        if ($pesan =='noBook'){
+                    ?>
+                    <div class="alert alert-warning alert-dismissible fade show mt-1" role="alert">
+                        <strong>Silahkan Tambahkan Buku Yang Akan Dipinjamkan!</strong>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                    <?php
+                        }
+                    ?>
                 <form action="proses_peminjaman.php?aksi=input_pem" method="post">
                    <div class="d-flex gap-2">
 
@@ -150,6 +161,7 @@ switch ($page){
 
 
             <form method="post" action="proses_detail_peminjaman.php?aksi=input_detail" id="myForm" class="mt-3">
+                    
                     <input type="text" name="pinjam" id="" value="<?= getPemId() ?>" hidden>
                     <div class="d-flex gap-3">
                     <select class="form-select mt-3 mb-2" name="buku">

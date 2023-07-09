@@ -46,7 +46,7 @@ if (!isset($_SESSION['user']) && !isset($_SESSION['id_login'])) {
         </a>
       </li>
       <li class="nav-item">
-        <a class="nav-link <?php if ((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'list'){ echo 'active'; }else if((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'input'){ echo 'active disabled';}; ?> " href="index.php?p=peminjaman">
+        <a class="nav-link <?php if ((isset($_GET['p']) && $_GET['p'] === 'peminjaman') || isset($_GET['page']) && $_GET['page'] === 'list'){ echo 'active'; }else if((isset($_GET['p']) && $_GET['p'] === 'peminjaman') && isset($_GET['page']) && $_GET['page'] === 'input'){ echo 'active disabled';}; ?> " href="index.php?p=peminjaman">
           <span data-feather="arrow-down-circle"></span>
           Peminjaman
         </a>
