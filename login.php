@@ -14,6 +14,17 @@
 <main class="form-signin w-100 m-auto" >
   <img src="./img/LOGO.png" alt="logo" width="100">
   <h1 class="h4 mb-3 fw-normal text-dark">SCIENTIA</h1>
+  <?php
+      $pesan=isset($_GET['msg']) ? $_GET['msg'] : '';
+      if ($pesan =='no'){
+  ?>
+  <div class="alert alert-danger alert-dismissible fade show" role="alert">
+      <strong>Email/Password Salah!</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  <?php
+      }
+  ?>
     <form action="" method="post">
 
     <div class="form-floating mb-3">
@@ -42,6 +53,8 @@
         $_SESSION['id_login'] = $data_login['id_petugas'];
         $_SESSION['level'] = $data_login['level'];
         header('location:index.php');
+        }else{
+          header('location:login.php?msg=no');
         }
       }
   ?>

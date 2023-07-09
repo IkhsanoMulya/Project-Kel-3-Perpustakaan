@@ -118,9 +118,19 @@
                    
                     
                         <input type="text" class="form-control" value="<?= getPetId() ?>" name="id_petugas" hidden>
-                   
+                        <?php
+                            $pesan=isset($_GET['msg']) ? $_GET['msg'] : '';
+                            if ($pesan =='dif'){
+                        ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Password tidak Sama!</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <?php
+                            }
+                        ?>
                     <div class="d-flex gap-3">
-
+                       
                         <div class="">
                             <label class="form-label">Nama Petugas</label>
                             <input type="text" class="form-control"  name="nama_petugas" required>
@@ -180,7 +190,17 @@
                 <form action="proses_petugas.php?aksi=edit_user" method="post">
            
                     <input type="text" class="form-control" name="id_petugas" value="<?= $data['id_petugas'] ?>" hidden>
-             
+                    <?php
+                            $pesan=isset($_GET['msg']) ? $_GET['msg'] : '';
+                            if ($pesan =='dif'){
+                        ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <strong>Password tidak Sama!</strong>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                        <?php
+                            }
+                        ?>
                     <div class="d-flex gap-3">
 
                         <div class="">

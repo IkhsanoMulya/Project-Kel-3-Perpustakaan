@@ -37,6 +37,9 @@ if ($_GET['aksi'] == 'input_peng') {
             $selisih = $formatDate1->diff($formatDate2);
             $jumlahHari = $selisih->format("%a");
             $denda = $dendaHarian*$jumlahHari;
+            if ($denda >= 50000) {
+                $denda = 50000;
+            }
         }else{
             $denda=0;
         }

@@ -34,9 +34,8 @@
             elseif($password != $confirm_password){
                     echo "
                     <script>
-                        alert('Password tidak sama dengan Confirm Password!');
-                        document.location.href = 'index.php?p=petugas&page=input';
-                        </script>";
+                        document.location.href = 'index.php?p=petugas&page=input&msg=dif';
+                    </script>";
                 } 
         }
     }
@@ -77,8 +76,7 @@
             }elseif($password != $confirm_password){
                 echo "
                 <script>
-                    alert('Password tidak sama dengan Confirm Password!');
-                    document.location.href = 'index.php?p=petugas&page=edit&id_edit=$_POST[id]';
+                    document.location.href = 'index.php?p=petugas&page=edit&id_edit=$_POST[id]'&msg=dif;
                 </script>";
             }else{
                 //query
